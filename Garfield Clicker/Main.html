@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #ff9f43;">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">0 Garfs</title>
+    <link rel="stylesheet" href="clicker.css">
+    <script src="clicker.js" defer></script>
+</head>
+<body>
+    <div id='center_column' class='center_column' style="background-color: #ffa502;">
+        <img src="GoldenNermal.png" id="goldenNermal" style="display: none; z-index: 10; position: relative">
+        <h1 id="goldenNermalMessage" style="display: none; z-index: 9;"><div id="buffName">buffName</div> <strong id="buffTime">00</strong>s left...</h1>
+        <button id="RESET">RESET</button>
+        <header><h1>Garfield Clicker</h1></header>
+        <img src="png-transparent-garfield-others-food-computer-software-smile.png" 
+        alt="Garfield" id="garface" style="padding-top: 25px">
+        <h3 id="GPS"></h3>
+        <h2>Garfs:</h2>
+        <h2 id="garfs">0</h2>
+        <button id="SAVE">SAVE</button>
+        <br>
+        <button id="STOREBUTTON">STORE ▼</button>
+        <store id="STORE" style="display:none;">
+            
+            <div id="lasagnas" >
+                <br>
+                <button id="buyLasagnas" class="building">Lasagna</button>
+                <div id="infoLasagnas" class="buildingInfoHidden">
+                    <p>
+                        <strong id="gpsLasagnas">0.1</strong> GPS (Garf per second)... 
+                        You currently have <strong id="numLasagnas">0</strong> Lasagnas.
+                        ($<strong id="costLasagnas">10</strong>)
+                    </p>
+                </div>
+            </div>
+            <br><br><br><br>
+            <div id="monsters" style="display: none;">
+                <br>
+                <button id="buyMonsters" class="building" style="top: 1000px;">Singing Monsters</button>
+                <div id="infoMonsters" class="buildingInfoHidden" style="top: -60px;">
+                    <p>
+                        <strong id="gpsMonsters">1</strong> GPS... 
+                        You currently have <strong id="numMonsters">0</strong> Monsters.
+                        ($<strong id="costMonsters">200</strong>)
+                    </p>
+                </div>
+            </div>
+            <br><br><br><br>
+            <div id="anteaters" style="display: none;">
+                <br>
+                <button id="buyAnteaters" class="building" style="top: 1100px;">Anteaters</button>
+                <div id="infoAnteaters" class="buildingInfoHidden" style="top: -60px;">
+                    <p>
+                        <strong id="gpsAnteaters">10</strong> GPS... 
+                        You currently have <strong id="numAnteaters">0</strong> Anteaters.
+                        ($<strong id="costAnteaters">200000</strong>)
+                    </p>
+                </div>
+            </div>
+        </store>
+    </div>
+    
+</body>
+</html>
