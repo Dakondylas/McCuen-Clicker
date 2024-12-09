@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hide and Seek Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="menu">
+    <h1>Hide and Seek Game</h1>
+    <h2>Rules & Abilities</h2>
+    <ul>
+      <li>Move with <b>WASD</b>.</li>
+      <li>Shoot lasers with <b>Left Mouse Click</b> (5 shots, reload with <b>R</b>).</li>
+      <li>Reload with <b>R</b> (takes 3 seconds to reload).</li>
+      <li>Go invisible with <b>Spacebar</b> (lasts 1.5 seconds, 10-second cooldown). While invisible, the enemy won’t move.</li>
+      <li>Use <b>E</b> to clear all fire obstacles (5-second cooldown, cooldown for ability is 15 seconds).</li>
+      <li>Avoid the enemy and fire obstacles. Collisions will result in a loss.</li>
+      <li>Survive for <b>3 minutes and 21 seconds</b> to win!</li>
+    </ul>
+    <button id="start-btn">Start Game</button>
+  </div>
+
+  <div id="game-container" style="display: none;">
+    <div id="player"></div>
+    <div id="enemy"></div>
+    <div id="fire"></div>
+    <div id="timer">3:21</div>
+    <div id="message"></div>
+    <div id="invisibility">Invisibility Ready!</div>
+    <div id="ammo">Ammo: 5/5</div>
+  </div>
+
+  <!-- Audio controls -->
+  <div id="audio-controls">
+    <audio id="game-audio" loop>
+      <source src="file:///C:/Users/idris/Downloads/cookiejarhidnseek/Doja_Cat_-_Cookie_Jar_Audio_[_YTBMP3.org_].mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <label for="volume">Volume:</label>
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

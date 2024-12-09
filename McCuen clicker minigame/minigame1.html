@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Fighting Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>2D Fighting Game</h1>
+        <div id="character-selection">
+            <h2>Select Your Character</h2>
+            <button onclick="selectCharacter('Warrior')">Warrior</button>
+        </div>
+        <div id="game" class="hidden">
+            <div id="player" class="character warrior"></div>
+            <div id="bot" class="character bot bot-idle"></div>
+            <div id="controls">
+                <p>Use W/A/S/D to move, and J to attack! You must be close to attack the bot.</p>
+            </div>
+            <div id="health-bar">
+                <p>Player Health: <span id="player-health">150</span></p>
+                <p>Bot Health: <span id="bot-health">100</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
