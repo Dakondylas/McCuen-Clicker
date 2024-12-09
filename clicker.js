@@ -134,7 +134,29 @@ function buyTeams() {
         
         toggleStore();
     } else {
-        window.alert("Not enough CuenCoins :(");
+        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+            const message = document.createElement('div');
+            message.id = 'notEnoughCuenCoinsMessage';
+            message.style.position = 'fixed';
+            message.style.top = '10%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, 0)';
+            message.style.backgroundColor = '#ffcccc';
+            message.style.padding = '10px 20px';
+            message.style.border = '2px solid #ff6666';
+            message.style.borderRadius = '5px';
+            message.style.color = '#990000';
+            message.style.fontSize = '16px';
+            message.style.fontWeight = 'bold';
+            message.style.zIndex = '1000';
+            message.innerText = 'Not enough CuenCoins!';
+            document.body.appendChild(message);
+        
+            // Automatically remove the message after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        }
     };
 };
 
@@ -156,7 +178,29 @@ function buyAnteaters() {
         
         toggleStore();
     } else {
-        window.alert("Not enough CuenCoins :(");
+        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+            const message = document.createElement('div');
+            message.id = 'notEnoughCuenCoinsMessage';
+            message.style.position = 'fixed';
+            message.style.top = '10%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, 0)';
+            message.style.backgroundColor = '#ffcccc';
+            message.style.padding = '10px 20px';
+            message.style.border = '2px solid #ff6666';
+            message.style.borderRadius = '5px';
+            message.style.color = '#990000';
+            message.style.fontSize = '16px';
+            message.style.fontWeight = 'bold';
+            message.style.zIndex = '1000';
+            message.innerText = 'Not enough CuenCoins!';
+            document.body.appendChild(message);
+        
+            // Automatically remove the message after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        }
     };
 };
 
@@ -173,7 +217,29 @@ function buyMech() {
         setTimeout(RefreshInterval(), 1); 
         toggleStore(); 
     } else {
-        window.alert("Not enough CuenCoins :(");
+        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+            const message = document.createElement('div');
+            message.id = 'notEnoughCuenCoinsMessage';
+            message.style.position = 'fixed';
+            message.style.top = '10%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, 0)';
+            message.style.backgroundColor = '#ffcccc';
+            message.style.padding = '10px 20px';
+            message.style.border = '2px solid #ff6666';
+            message.style.borderRadius = '5px';
+            message.style.color = '#990000';
+            message.style.fontSize = '16px';
+            message.style.fontWeight = 'bold';
+            message.style.zIndex = '1000';
+            message.innerText = 'Not enough CuenCoins!';
+            document.body.appendChild(message);
+        
+            // Automatically remove the message after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        }
     };
 };
 if (absoluteCCPS > 0) {
