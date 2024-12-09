@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+#game-container {
+    margin: 0 auto;
+    width: 800px;
+    height: 500px;
+    position: relative;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+}
+
+/* General styles for characters */
+.character {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain; /* Adjusts sprite size */
+}
+
+/* Player styles */
+.warrior {
+    width: 128px; /* Frame width */
+    height: 128px; /* Frame height */
+    background-image: url('Soldier-Walk.png'); /* Walking sprite sheet */
+    background-size: 1024px 128px; /* 8 frames */
+}
+
+.attacking {
+    background-image: url('Soldier-Attack01.png'); /* Attack sprite sheet */
+    background-size: 768px 128px; /* 6 frames */
+}
+
+/* Bot (Enemy NPC) as a Red Cube */
+.bot {
+    width: 96px; /* Cube width */
+    height: 96px; /* Cube height */
+    position: absolute;
+    background-color: greenyellow; /* Make the bot a red cube */
+    border: 2px solid lime; /* Optional: Add a border for better visibility */
+    z-index: 10;
+    box-sizing: border-box; /* Ensure the border doesn't affect size */
+}
