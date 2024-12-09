@@ -134,29 +134,7 @@ function buyTeams() {
         
         toggleStore();
     } else {
-        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
-            const message = document.createElement('div');
-            message.id = 'notEnoughCuenCoinsMessage';
-            message.style.position = 'fixed';
-            message.style.top = '10%';
-            message.style.left = '50%';
-            message.style.transform = 'translate(-50%, 0)';
-            message.style.backgroundColor = '#ffcccc';
-            message.style.padding = '10px 20px';
-            message.style.border = '2px solid #ff6666';
-            message.style.borderRadius = '5px';
-            message.style.color = '#990000';
-            message.style.fontSize = '16px';
-            message.style.fontWeight = 'bold';
-            message.style.zIndex = '1000';
-            message.innerText = 'Not enough CuenCoins!';
-            document.body.appendChild(message);
-        
-            // Automatically remove the message after 3 seconds
-            setTimeout(() => {
-                document.body.removeChild(message);
-            }, 3000);
-        }
+        window.alert("Not enough CuenCoins :(");
     };
 };
 
@@ -178,29 +156,7 @@ function buyAnteaters() {
         
         toggleStore();
     } else {
-        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
-            const message = document.createElement('div');
-            message.id = 'notEnoughCuenCoinsMessage';
-            message.style.position = 'fixed';
-            message.style.top = '10%';
-            message.style.left = '50%';
-            message.style.transform = 'translate(-50%, 0)';
-            message.style.backgroundColor = '#ffcccc';
-            message.style.padding = '10px 20px';
-            message.style.border = '2px solid #ff6666';
-            message.style.borderRadius = '5px';
-            message.style.color = '#990000';
-            message.style.fontSize = '16px';
-            message.style.fontWeight = 'bold';
-            message.style.zIndex = '1000';
-            message.innerText = 'Not enough CuenCoins!';
-            document.body.appendChild(message);
-        
-            // Automatically remove the message after 3 seconds
-            setTimeout(() => {
-                document.body.removeChild(message);
-            }, 3000);
-        }
+        window.alert("Not enough CuenCoins :(");
     };
 };
 
@@ -217,29 +173,7 @@ function buyMech() {
         setTimeout(RefreshInterval(), 1); 
         toggleStore(); 
     } else {
-        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
-            const message = document.createElement('div');
-            message.id = 'notEnoughCuenCoinsMessage';
-            message.style.position = 'fixed';
-            message.style.top = '10%';
-            message.style.left = '50%';
-            message.style.transform = 'translate(-50%, 0)';
-            message.style.backgroundColor = '#ffcccc';
-            message.style.padding = '10px 20px';
-            message.style.border = '2px solid #ff6666';
-            message.style.borderRadius = '5px';
-            message.style.color = '#990000';
-            message.style.fontSize = '16px';
-            message.style.fontWeight = 'bold';
-            message.style.zIndex = '1000';
-            message.innerText = 'Not enough CuenCoins!';
-            document.body.appendChild(message);
-        
-            // Automatically remove the message after 3 seconds
-            setTimeout(() => {
-                document.body.removeChild(message);
-            }, 3000);
-        }
+        window.alert("Not enough CuenCoins :(");
     };
 };
 if (absoluteCCPS > 0) {
@@ -533,8 +467,45 @@ document.getElementById('THEMES').addEventListener('click', function() {
             if (SETTINGTHEMESOPEN[0] == false) {
                 document.getElementById('infoTHEMES').style.display = 'block';
                 SETTINGTHEMESOPEN = [true];
+                if (THEME == 'McCuen') {
+                    document.getElementById('McCuenTheme').disabled = true;
+                    document.getElementById('GarfieldTheme').disabled = false;
+                } else if (THEME == 'Garfield') {
+                    document.getElementById('GarfieldTheme').disabled = true;
+                    document.getElementById('McCuenTheme').disabled = false;
+                }
             } else {
                 SETTINGTHEMESOPEN = [false];
                 document.getElementById('infoTHEMES').style.display = 'none';
             }
-        });
+});
+
+document.getElementById('McCuenTheme').addEventListener('click', function() {
+    
+});
+
+document.getElementById('GarfieldTheme').addEventListener('click', function() {
+    THEME = 'Garfield'
+    document.getElementById('SETTINGSBUTTON').click()
+    document.body.background = 'Themes/Garfield/Background.png'
+    document.getElementById('goldenDuck').src = "Themes/Garfield/GoldenThing.png"
+    document.getElementById('McCuenFace').src = "Themes/Garfield/TheClicked.png"
+    for (x=0; x<4; x++) {
+        var tempClassVar = document.querySelectorAll(`${(['h1', 'h2', 'h3', '.building'])[x]}`)
+        tempClassVar.forEach(element => {
+            element.style.color = '#fed330';
+            element.style.textShadow = '0px 3.75px 1px #000000';
+        })
+    }
+    var tempClassVar = document.querySelectorAll(`button`)
+        tempClassVar.forEach(element => {
+            element.style.backgroundColor = '#f8a5c2';
+        })
+    document.getElementById('infoTHEMES').style.backgroundColor = '#ff9f43'
+    document.getElementById('SETTINGSMENU').style.backgroundColor = '#ffa542'
+
+    var tempClassVar = document.querySelectorAll(`.buildingInfoHidden`)
+        tempClassVar.forEach(element => {
+            element.style.backgroundColor = '#ff9f43';
+        })
+});
