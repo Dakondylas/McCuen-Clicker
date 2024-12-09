@@ -101,3 +101,7 @@ p {
     position: relative;
     display: none;
 }
+
+.THEMETEXT {
+    left: 0px;
+}

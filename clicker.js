@@ -14,6 +14,9 @@ teams[2] = (1)
 let anteaters = [(Number(localStorage['anteaters[0]'] || 0))];
 anteaters[1] = (Math.trunc(((1.3**anteaters[0]) * 15000)));
 anteaters[2] = (10)
+let GarfieldTextWords = ['GPS', 'Gps', 'gps', 'Garfs', 'Garfield']
+let McCuenTextWords = ['CCPS', 'Ccps', 'ccps', 'CuenCoins', 'McCuen']
+let usedTheme = [McCuenTextWords];
 
 let unlockedBuildings = [];
 function updateOwnedBuildings() {
@@ -45,7 +48,7 @@ let goldDuckBuffs = ['Double CCPS', '10x Click Power', 'Free Random Building']
 // let goldDuckSpawnInterval = [setInterval(spawnDuck, 1000)];
 
 cuenCoins.innerHTML = CUENCOINS;
-document.getElementById("title").innerHTML = (CUENCOINS + " CuenCoins")
+document.getElementById("title").innerHTML = (CUENCOINS + ` ${usedTheme[0][0]}`)
 let McCuenFace = document.getElementById("McCuenFace");
 let previousCuenCoins = Number(CUENCOINS);
 let costMechs;
@@ -76,7 +79,7 @@ function click() {
     previousCuenCoins = CUENCOINS;
     CUENCOINS = (previousCuenCoins + clickAmount[0]);
     cuenCoins.innerHTML = CUENCOINS;
-    document.getElementById("title").innerHTML = (CUENCOINS + " CuenCoins");
+    document.getElementById("title").innerHTML = (CUENCOINS + ` ${usedTheme[0][0]}`);
 };
 function save() {
     localStorage['CUENCOINS'] = String(CUENCOINS);
@@ -127,14 +130,14 @@ function buyTeams() {
 
         teams[0] = teams[0] + 1;
         absoluteCCPS = ((mechs[0]*mechs[2]) + (teams[2]*teams[0]));
-        document.getElementById("CCPS").innerHTML = "CCPS: " + absoluteCCPS.toFixed(1);
+        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]} ` + absoluteCCPS.toFixed(1);
         teams[1] = Math.trunc(((1.3**teams[0]) * 200));
         storeOpen = false;
         setTimeout(RefreshInterval(), 1);
         
         toggleStore();
     } else {
-        window.alert("Not enough CuenCoins :(");
+        window.alert(`Not enough ${usedTheme[0][3]} :(` );
     };
 };
 
@@ -149,14 +152,14 @@ function buyAnteaters() {
         absoluteCCPS = ((mechs[0]*mechs[2]) +
                        (teams[2]*teams[0]) + 
                        (anteaters[0]*anteaters[2]));
-        document.getElementById("CCPS").innerHTML = "CCPS: " + absoluteCCPS.toFixed(1);
+        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
         anteaters[1] = Math.trunc(((1.3**anteaters[0]) * 15000));
         storeOpen = false;
         setTimeout(RefreshInterval(), 1);
         
         toggleStore();
     } else {
-        window.alert("Not enough CuenCoins :(");
+        window.alert(`Not enough ${usedTheme[0][3]} :(`);
     };
 };
 
@@ -167,23 +170,23 @@ function buyMech() {
         cuenCoins.innerHTML = CUENCOINS;
         mechs[0] = mechs[0] + 1;
         absoluteCCPS = ((mechs[0]*mechs[2]) + (teams[0] * teams[2]));
-        document.getElementById("CCPS").innerHTML = "CCPS: " + absoluteCCPS.toFixed(1); 
+        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1); 
         mechs[1] = Math.trunc(((1.3**mechs[0]) * 10));
         storeOpen = false; 
         setTimeout(RefreshInterval(), 1); 
         toggleStore(); 
     } else {
-        window.alert("Not enough CuenCoins :(");
+        window.alert(`Not enough ${usedTheme[0][3]} :(`);
     };
 };
 if (absoluteCCPS > 0) {
-    document.getElementById("CCPS").innerHTML = "CCPS: " + absoluteCCPS.toFixed(1);
+    document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
 };
 function Tic() {
     previousCuenCoins = CUENCOINS;
     CUENCOINS = (previousCuenCoins + 1);
     cuenCoins.innerHTML = CUENCOINS;    
-    document.getElementById("title").innerHTML = (CUENCOINS + " CuenCoins");    
+    document.getElementById("title").innerHTML = (CUENCOINS + ` ${usedTheme[0][0]}`);    
 };
 function reset() {
     localStorage['CUENCOINS'] = String(0);
@@ -481,10 +484,60 @@ document.getElementById('THEMES').addEventListener('click', function() {
 });
 
 document.getElementById('McCuenTheme').addEventListener('click', function() {
-    
+    usedTheme = [McCuenTextWords]
+    THEME = 'McCuen'
+    document.getElementById('SETTINGSBUTTON').click()
+    document.body.background = 'Themes/McCuen/Background.png'
+    document.getElementById('goldenDuck').src = "Themes/McCuen/GoldenThing.png"
+    document.getElementById('McCuenFace').src = "Themes/McCuen/TheClicked.gif"
+    for (x=0; x<4; x++) {
+        var tempClassVar = document.querySelectorAll(`${(['h1', 'h2', 'h3', '.building'])[x]}`)
+        tempClassVar.forEach(element => {
+            element.style.color = '#ff0202';
+            element.style.textShadow = '0px 3.75px 1px #000000';
+        })
+    }
+    var tempClassVar = document.querySelectorAll(`button`)
+        tempClassVar.forEach(element => {
+            element.style.backgroundColor = '#fe3030';
+        })
+    document.getElementById('infoTHEMES').style.backgroundColor = 'rgb(77, 0, 0)'
+    document.getElementById('SETTINGSMENU').style.backgroundColor = 'red'
+
+    var tempClassVar = document.querySelectorAll(`.buildingInfoHidden`)
+        tempClassVar.forEach(element => {
+            element.style.backgroundColor = '#ff5050';
+        })
+        
+    var tempClassVar = document.querySelectorAll(`themetext`)
+    tempClassVar.forEach(element => {
+        if (element.textContent == 'GPS') {
+            element.textContent = 'CCPS'
+        } else if (element.textContent == 'Gps') {
+            element.textContent = 'Ccps'
+        } else if (element.textContent == 'gps') {
+            element.textContent = 'ccps'
+        } else if (element.textContent == 'Garfs') {
+            element.textContent = 'CuenCoins'
+        } else if (element.textContent == 'Garfield') {
+            element.textContent = 'McCuen'
+        } else if (element.textContent == 'Lasagna') {
+            element.textContent = 'Mechanical Keyboards'
+        } else if (element.textContent == 'lasagnas') {
+            element.textContent = 'Mechs'
+        } else if (element.textContent == 'Fingers') {
+            element.textContent = 'Microsoft Teams'
+        } else if (element.textContent == 'fingers') {
+            element.textContent = 'Teams'
+        } 
+        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
+    })
 });
 
 document.getElementById('GarfieldTheme').addEventListener('click', function() {
+
+    // This part changes all the colors of the theme
+    usedTheme = [GarfieldTextWords]
     THEME = 'Garfield'
     document.getElementById('SETTINGSBUTTON').click()
     document.body.background = 'Themes/Garfield/Background.png'
@@ -508,4 +561,29 @@ document.getElementById('GarfieldTheme').addEventListener('click', function() {
         tempClassVar.forEach(element => {
             element.style.backgroundColor = '#ff9f43';
         })
+
+    // this part changes all the actual text of the theme
+    var tempClassVar = document.querySelectorAll(`themetext`)
+    tempClassVar.forEach(element => {
+        if (element.textContent == 'CCPS') {
+            element.textContent = 'GPS'
+        } else if (element.textContent == 'Ccps') {
+            element.textContent = 'Gps'
+        } else if (element.textContent == 'ccps') {
+            element.textContent = 'gps'
+        } else if (element.textContent == 'CuenCoins') {
+            element.textContent = 'Garfs'
+        } else if (element.textContent == 'McCuen') {
+            element.textContent = 'Garfield'
+        } else if (element.textContent == 'Mechanical Keyboards') {
+            element.textContent = 'Lasagna'
+        } else if (element.textContent == 'Mechs') {
+            element.textContent = 'lasagnas'
+        } else if (element.textContent == 'Microsoft Teams') {
+            element.textContent = 'Fingers'
+        } else if (element.textContent == 'Teams') {
+            element.textContent = 'fingers'
+        } 
+        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
+    })
 });
