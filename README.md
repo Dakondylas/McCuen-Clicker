@@ -60,6 +60,8 @@
 - **HTML5**
 - **CSS3**
 - **JavaScript**
+- **ChatGPT**
 
+*Note: ChatGPT was used to improve the formatting of this README*
 
 ✨ *Thank you for playing CuenClicker! Have fun clicking and upgrading your way to greatness!* ✨
