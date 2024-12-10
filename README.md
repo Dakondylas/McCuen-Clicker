@@ -14,6 +14,7 @@
 
 - **Incremental Upgrades:** Purchase buildings like Mechanical Keyboards, Microsoft Teams, and Cats to boost your CuenCoins per second (CCPS).
 - **Boss Battles:** Challenge yourself with mini-games such as Whack-a-Mole, Memory Match, and Quick Reaction to earn massive rewards.
+
 ![image](https://github.com/user-attachments/assets/a879802b-e2c0-47c1-8a1d-5d4dba7dc544)
 
 - **Interactive UI:** Enjoy smooth animations, responsive design, and interactive elements that enhance your gaming experience.
@@ -26,6 +27,7 @@
    - **Mechanical Keyboards:** +0.1 CCPS
    - **Microsoft Teams:** +1 CCPS
    - **Cats:** +10 CCPS
+
 ![image](https://github.com/user-attachments/assets/42ea182f-667b-4038-8e12-702b0c1a1f69)
 
 3. **Engage in Boss Battles:** Click the **Boss Battle** button to enter a challenging mini-game.
