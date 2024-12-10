@@ -34,6 +34,9 @@
    - **Whack-a-Mole:** Click the appearing moles as quickly as possible.
    - **Memory Match:** Match pairs of cards within the time limit.
    - **Quick Reaction:** Click moving targets before they disappear.
+![image](https://github.com/user-attachments/assets/19a6f7a9-c911-4754-96da-a9620ada1b61)
+
+
 4. **Earn Rewards:** Successfully complete mini-games to earn bonus CuenCoins and enhance your gameplay.
 
 ## 🚀 Installation
