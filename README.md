@@ -8,11 +8,14 @@
 ## 🎮 Features
 
 - **Multiple Themes:** Switch between **McCuen** and **Garfield** themes to enjoy different visual styles and background particles.
+
 ![image](https://github.com/user-attachments/assets/b06a16c4-4875-41a7-a70c-1652169574d6) ![image](https://github.com/user-attachments/assets/a37cc8a4-5f38-49e4-8fa4-0c134158688e)
 
 
 - **Incremental Upgrades:** Purchase buildings like Mechanical Keyboards, Microsoft Teams, and Cats to boost your CuenCoins per second (CCPS).
 - **Boss Battles:** Challenge yourself with mini-games such as Whack-a-Mole, Memory Match, and Quick Reaction to earn massive rewards.
+![image](https://github.com/user-attachments/assets/a879802b-e2c0-47c1-8a1d-5d4dba7dc544)
+
 - **Interactive UI:** Enjoy smooth animations, responsive design, and interactive elements that enhance your gaming experience.
 - **Vibrant Animations:** Clickable images shake and rotate upon interaction, adding a dynamic feel to the game.
 
@@ -23,6 +26,8 @@
    - **Mechanical Keyboards:** +0.1 CCPS
    - **Microsoft Teams:** +1 CCPS
    - **Cats:** +10 CCPS
+![image](https://github.com/user-attachments/assets/42ea182f-667b-4038-8e12-702b0c1a1f69)
+
 3. **Engage in Boss Battles:** Click the **Boss Battle** button to enter a challenging mini-game.
    - **Whack-a-Mole:** Click the appearing moles as quickly as possible.
    - **Memory Match:** Match pairs of cards within the time limit.
