@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+  }
+  
+  #menu {
+    padding: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  #game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: url('background.png') no-repeat center center/cover;
+  }
+  
+  #player, #enemy, #fire {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+  }
+  
+  #player {
+    background: url('player_cookie.png') no-repeat center center/contain;
+  }
+  
+  #enemy {
+    background: url('enemy_cookie.png') no-repeat center center/contain;
+  }
+  
+  .fire {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: url('fire.png') no-repeat center center/contain;
+    display: block;
+  }
+  
+  .laser {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    background: url('laser.png') no-repeat center center;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  #timer, #invisibility, #ammo {
+    position: absolute;
+    top: 20px;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+  }
+  
+  #timer {
+    left: 20px;
+  }
+  
+  #invisibility {
+    right: 20px;
+  }
+  
+  #ammo {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  #message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: red;
+    display: none;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  #audio-controls {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 16px;
+    color: white;
+  }
+  

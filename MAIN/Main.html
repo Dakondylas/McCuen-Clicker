@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000000;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">0 CCps</title>
+    <link rel="stylesheet" href="clicker.css">
+    <script src="clicker.js" defer></script>
+</head>
+<body background="Themes/McCuen/Background.png" style="background-repeat: no-repeat; background-size: cover;">
+    <div id='center_column' class='center_column' >
+        <img src="Themes/McCuen/GoldenThing.png" id="goldenDuck" style="display: none; z-index: 10; position: absolute">
+        <h1 id="goldenDuckMessage" style="display: none; z-index: 9;"><div id="buffName">buffName</div> <strong id="buffTime">00</strong>s left...</h1>
+
+        <button id="SETTINGSBUTTON">SETTINGS ▼</button>
+        <br>
+        <div id="SETTINGSMENU" style="display: none; z-index: 3; position: absolute; left: 46.5%; background-color: red; outline: 4px solid black; padding: 25px;">
+            <button id="RESET">RESET</button>
+            <br>
+            <button id="THEMES">THEMES ▼</button>
+                <div id="infoTHEMES" style="top: -60px; background-color: rgb(77, 0, 0); outline: 2px solid rgb(0, 0, 0); display: none;">
+                        <br>
+                        <button id="McCuenTheme">McCuen</button>
+                        <br>
+                        <button id="GarfieldTheme">Garfield</button>
+                        <br>
+                </div>
+        </div>
+
+        <header><h1>McCuen Clicker</h1></header>
+        <img src="Themes/McCuen/TheClicked.gif" 
+        alt="McCuen" id="McCuenFace" style="padding-top: 25px">
+        <h3 id="CCPS"></h3>
+        <h2>CuenCoins:</h2>
+        <h2 id="cuenCoins">0</h2>
+        <button id="SAVE">SAVE</button>
+        <br>
+        <button id="STOREBUTTON">STORE ▼</button>
+        <store id="STORE" style="display:none;">
+            
+            <div id="mechs" >
+                <br>
+                <button id="buyMechs" class="building">Mechanical Keyboards</button>
+                <div id="infoMechs" class="buildingInfoHidden">
+                    <p>
+                        <strong id="ccpsMechs">0.1</strong> CCPS (CuenCoins per second)... 
+                        You currently have <strong id="numMechs">0</strong> Mechanical Keyboards.
+                        ($<strong id="costMechs">10</strong>)
+                    </p>
+                </div>
+            </div>
+            <br><br><br><br>
+            <div id="teams" style="display: none;">
+                <br>
+                <button id="buyTeams" class="building" style="top: 1000px;">Microsoft Teams</button>
+                <div id="infoTeams" class="buildingInfoHidden" style="top: -60px;">
+                    <p>
+                        <strong id="ccpsTeams">1</strong> CCPS... 
+                        You currently have <strong id="numTeams">0</strong> Teams.
+                        ($<strong id="costTeams">200</strong>)
+                    </p>
+                </div>
+            </div>
+            <br><br><br><br>
+            <div id="anteaters" style="display: none;">
+                <br>
+                <button id="buyAnteaters" class="building" style="top: 1100px;">Anteaters</button>
+                <div id="infoAnteaters" class="buildingInfoHidden" style="top: -60px;">
+                    <p>
+                        <strong id="ccpsAnteaters">10</strong> CCPS... 
+                        You currently have <strong id="numAnteaters">0</strong> Anteaters.
+                        ($<strong id="costAnteaters">200000</strong>)
+                    </p>
+                </div>
+            </div>
+        </store>
+    </div>
+    <audio id="audioPlayer" controls>
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Wait until the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // List of songs (relative paths)
+            const songs = [
+                "Vamp Anthem (Clean) - Playboi Carti [ ezmp3.cc ].mp3",
+                "Doja Cat - Paint The Town Red (Clean - Lyrics) [ ezmp3.cc ].mp3",
+                "ILoveUIHateU (Clean) - Playboi Carti [ ezmp3.cc ].mp3",
+                "Sexyy Red - Get It Sexyy (Clean) [ ezmp3.cc ].mp3",
+                "21 Savage - redrum (Clean - Lyrics) [ ezmp3.cc ].mp3",
+                "DaBaby - Red Light Green Light (CLEAN) [ ezmp3.cc ].mp3"
+            ];
+
+            // Function to shuffle and return a random song
+            function getRandomSong() {
+                return songs[Math.floor(Math.random() * songs.length)];
+            }
+
+            // Get the audio player element
+            const audioPlayer = document.getElementById("audioPlayer");
+
+            // Function to handle the user interaction and start playing the song
+            function playSong() {
+                // Set a random song as the source
+                const randomSong = getRandomSong();
+                audioPlayer.src = randomSong;
+                audioPlayer.play().catch((error) => {
+                    console.error("Error playing audio:", error);
+                });
+
+                // Remove the click event listener after the song starts playing
+                document.body.removeEventListener('click', playSong);
+
+                // Automatically play next song once the current song ends
+                audioPlayer.addEventListener('ended', function() {
+                    playSong(); // Start next song once the current one finishes
+                });
+            }
+
+            // Play the song automatically once the page is loaded after user click
+            document.body.addEventListener('click', playSong);
+        });
+    </script>
+
+</body>
+</html>
