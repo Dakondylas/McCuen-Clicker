@@ -1,10 +1,14 @@
+/* Existing Styles */
+
 .center_column {
     margin-left: 25%;
     margin-right: 25%;
     margin-top: -42px;
     padding-top: 43px;
     padding-bottom: 15%;
+    animation: fadeIn 1s ease-in-out;
 }
+
 .left_column {
     margin-left: 0%;
     margin-right: 75%;
@@ -12,77 +16,130 @@
     padding-top: 0px;
     margin-bottom: 50%;
 }
+
+h1, h2, h3, p {
+    /* Removed hover animations from non-interactive elements */
+    transition: color 0.2s;
+}
+
+h1:hover, h2:hover, h3:hover, p:hover {
+    color: #ff4545;
+}
+
 h1 {
     font-size: 50px;
     color: #ff0202;
     text-align: center;
     font-family: "Verdana";
-    text-shadow: 0px 4px 1px #fe3030;
-    -webkit-text-stroke:transparent;
+    text-shadow: 0px 4px 10px rgba(255, 0, 0, 0.7);
+    -webkit-text-stroke: transparent;
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 3px;
 }
+
 h2 {
     font-size: 40px;
     color: #ff0202;
     text-align: center;
     font-family: "Verdana";
-    text-shadow: 0px 4px 1px #fe3030;
-    -webkit-text-stroke:transparent;
+    text-shadow: 0px 4px 10px rgba(255, 0, 0, 0.7);
+    -webkit-text-stroke: transparent;
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 2.5px;
 }
+
 h3 {
     font-size: 30px;
     color: #ff0202;
     text-align: center;
     font-family: "Verdana";
-    text-shadow: 0px 3.5px 1px #fe3030;
-    -webkit-text-stroke:transparent;
+    text-shadow: 0px 3.5px 10px rgba(255, 0, 0, 0.7);
+    -webkit-text-stroke: transparent;
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 2px;
 }
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: "-150px"
-}
-button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #fe3030;
-}
+
 p {
     text-align: center;
     margin-left: 32.5%;
     margin-right: 32.5%;
     font-family: "Verdana";
-    text-shadow: 0px 3px 1px #fe3030;
-    -webkit-text-stroke:transparent;
+    text-shadow: 0px 3px 10px rgba(255, 0, 0, 0.7);
+    -webkit-text-stroke: transparent;
     -webkit-text-stroke-color: black;
     -webkit-text-stroke-width: 1px;     
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 0px; /* Removed unwanted quotes and values */
+    animation: float 3s ease-in-out infinite;
+    /* Removed glow effect */
+    transition: transform 0.3s ease;
+}
+
+img.clicked {
+    animation: shake 0.5s;
+    transform: rotate(5deg);
+}
+
+button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fe3030;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(254, 48, 48, 0.7);
+}
+
+button:hover {
+    background-color: #ff4c4c;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 76, 76, 0.9);
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(255, 76, 76, 0.5);
 }
 
 .building {
-    position: absolute;
-    left: 5%;
-    font-size: 30px;
-    color: #ff0202;
+    position: relative;
+    font-size: 20px;
+    color: #fff;
     text-align: center;
     font-family: "Verdana";
-    text-shadow: 0px 3.5px 1px #fe3030;
-    -webkit-text-stroke:transparent;
-    -webkit-text-stroke-color: black;
-    -webkit-text-stroke-width: 1.5px;
-    align-self: center;
-    width: 25%;
-    height: 60px;
-    margin-right: 25%;
-    margin-left: 32.5%;
-    background-color:#ff5050;
-    z-index: 1;
+    text-shadow: 0px 3.5px 10px rgba(255, 0, 0, 0.7);
+    background-color: #ff5050;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s, box-shadow 0 0 10px rgba(255, 80, 80, 0.7);
+}
+
+.building:hover {
+    background-color: #ff6666;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 102, 102, 0.9);
+}
+
+.building:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(255, 102, 102, 0.5);
+}
+
+.store {
+    animation: fadeIn 0.5s ease-out;
 }
 
 .buildingInfoVisible {
@@ -95,6 +152,8 @@ p {
     background-color:#ff5050;
     z-index: 2;
     outline: 2px solid black;
+    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 80, 80, 0.7);
 }
 
 .buildingInfoHidden {
@@ -102,6 +161,195 @@ p {
     display: none;
 }
 
+/* Glowing ThemeText */
 .THEMETEXT {
-    left: 0px;
+    color: #ff6666;
+    text-shadow: 0 0 10px rgba(255, 102, 102, 0.9);
+    transition: color 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Boss Battle Transition Animation Removed */
+
+/* Boss Battle Modal */
+#bossBattleModal {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden; 
+    background-color: rgba(0,0,0,0.95); 
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#bossBattleContent {
+    background-color: #000;
+    margin: 5% auto; 
+    padding: 20px;
+    border: none;
+    width: 90%; 
+    height: 90%;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.5s ease-in-out;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+/* Game Containers */
+.game-container {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Overlay Styles */
+#bossOverlay {
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    color: #fff; 
+    font-family: Arial, sans-serif; 
+    z-index: 101;
+}
+
+#bossOverlay h2 {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+#bossOverlay p {
+    font-size: 18px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+#exitBossBattle {
+    margin-top: 20px;
+    padding: 8px 16px;
+    background-color: #ff4c4c;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 76, 76, 0.7);
+    transition: background-color 0.3s, box-shadow 0 0 15px rgba(255, 76, 76, 0.9);
+}
+
+#exitBossBattle:hover {
+    background-color: #ff6666;
+    box-shadow: 0 0 20px rgba(255, 102, 102, 0.9);
+}
+
+#exitBossBattle:active {
+    background-color: #ff2e2e;
+    box-shadow: 0 0 5px rgba(255, 46, 46, 0.5);
+}
+
+/* Moving Background Particles */
+// General Particle Styles
+#bossBattleContent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+    animation: backgroundMove 60s linear infinite;
+}
+
+/* Theme-specific Particles */
+body.theme-McCuen #bossBattleContent::before {
+    background-image: 
+        url('Themes/McCuen/star.png'),
+        url('Themes/McCuen/star.png'),
+        url('Themes/McCuen/star.png');
+    background-repeat: repeat;
+    background-position: 0 0, 25px 25px, 50px 50px;
+    opacity: 0.5;
+}
+
+body.theme-Garfield #bossBattleContent::before {
+    background-image: 
+        url('Themes/Garfield/star.png'),
+        url('Themes/Garfield/star.png'),
+        url('Themes/Garfield/star.png');
+    background-repeat: repeat;
+    background-position: 0 0, 30px 30px, 60px 60px;
+    opacity: 0.3;
+}
+
+@keyframes backgroundMove {
+    0% { background-position: 0 0, 25px 25px, 50px 50px; }
+    100% { background-position: 1000px 1000px, 1025px 1025px, 1050px 1050px; }
+}
+
+/* Additional Styles for Games */
+
+/* Whack-a-Mole */
+#moleContainer {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #222;
+    overflow: hidden;
+}
+
+/* Memory Match */
+#cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.card {
+    /* Styles applied dynamically via JS */
+}
+
+/* Quick Reaction */
+#quickReactionGame {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #222;
+    overflow: hidden;
+}
+
+#target {
+    /* Styles applied dynamically via JS */
+}
+audio {
+    display: none; /* Hides the entire audio player */
 }

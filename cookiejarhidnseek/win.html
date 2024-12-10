@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000000;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigame</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #game-container {
+            display: block;
+            text-align: center;
+        }
+
+        #game-over {
+            display: none;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(255, 0, 0, 0.5);
+        }
+
+        #win-message {
+            color: #4CAF50; /* Green color for win */
+        }
+
+        #lose-message {
+            color: #f44336; /* Red color for loss */
+        }
+
+        .emoji {
+            font-size: 3rem;
+        }
+
+        button {
+            background-color: #ff5722;
+            color: white;
+            font-size: 18px;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+        }
+
+        .timer {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+
+        #menu {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <button id="start-btn">Start Game</button>
+    </div>
+    <div id="game-container" style="display: none;">
+        <div id="player"></div>
+        <div id="enemy"></div>
+        <div id="timer" class="timer"></div>
+        <div id="message"></div>
+    </div>
+<h1>🎉 You Win! 🎉</h1>
+<script> 
+setTimeout(() => {
+    window.location.href = '../main.html';
+}, 3000);</script>
+  
+</body>
+</html>
