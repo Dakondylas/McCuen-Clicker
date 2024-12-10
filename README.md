@@ -50,7 +50,8 @@
 
 ## 🎨 Screenshots
 
-![image](https://github.com/user-attachments/assets/9724bb09-ff96-4911-8c48-c9a72d57e9a0)
+![image](https://github.com/user-attachments/assets/422c9c57-df90-44c8-9e96-6db12b7a488a)
+
 
 ![image](https://github.com/user-attachments/assets/a88340f9-0e93-4ff7-a130-8dbe83df5c70)
 
