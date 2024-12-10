@@ -9,7 +9,8 @@
 
 - **Multiple Themes:** Switch between **McCuen** and **Garfield** themes to enjoy different visual styles and background particles.
 
-![image](https://github.com/user-attachments/assets/b06a16c4-4875-41a7-a70c-1652169574d6) ![image](https://github.com/user-attachments/assets/a37cc8a4-5f38-49e4-8fa4-0c134158688e)
+![image](https://github.com/user-attachments/assets/0805ef7a-103a-4527-aba1-c3178c2cb4c4)   ![image](https://github.com/user-attachments/assets/26053111-c446-4ade-bd90-8c225bab9e42)
+
 
 
 - **Incremental Upgrades:** Purchase buildings like Mechanical Keyboards, Microsoft Teams, and Cats to boost your CuenCoins per second (CCPS).
