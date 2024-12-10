@@ -1,4 +1,4 @@
-let THEME = (localStorage['THEME'] || 'McCuen')
+let THEME = [(localStorage['THEME'] || 'McCuen')]
 let cuenCoins = document.getElementById("cuenCoins");
 let CUENCOINS = Number(localStorage['CUENCOINS'] || 0);
 
@@ -11,16 +11,24 @@ let teams = [(Number(localStorage['teams[0]'] || 0))];
 teams[1] = (Math.trunc(((1.15**teams[0]) * 200)));
 teams[2] = (1)
 
+var SETTINGSOPEN = [false];
+var SETTINGTHEMESOPEN = [false];
+
 let cats = [(Number(localStorage['cats[0]'] || 0))];
 cats[1] = (Math.trunc(((1.15**cats[0]) * 15000)));
 cats[2] = (10)
 let GarfieldTextWords = ['GPS', 'Gps', 'gps', 'Garfs', 'Garfield']
 let McCuenTextWords = ['CCPS', 'Ccps', 'ccps', 'CuenCoins', 'McCuen']
 let usedTheme = []
-if (THEME == 'McCuen') {
+if (THEME[0] == 'McCuen') {
     usedTheme = [McCuenTextWords];
 } else {
     usedTheme = [GarfieldTextWords];
+    setTimeout(function() {
+        document.getElementById('SETTINGSBUTTON').click()}, 1)
+    setTimeout(function() {document.getElementById('THEMES').click()}, 1)
+    setTimeout(function() {document.getElementById('GarfieldTheme').disabled = false}, 1)
+    setTimeout(function() {document.getElementById('GarfieldTheme').click()}, 1)
 }
 
 
@@ -173,9 +181,9 @@ function save() {
     localStorage['mechs[0]'] = String(mechs[0]);
     localStorage['teams[0]'] = String(teams[0]);
     localStorage['cats[0]'] = String(cats[0]);
-    if (THEME == 'McCuen') {
+    if (THEME[0] == 'McCuen') {
         localStorage['THEME'] = 'McCuen'
-    } else if (THEME == 'Garfield') {
+    } else if (THEME[0] == 'Garfield') {
         localStorage['THEME'] = 'Garfield'
     }
     if (document.getElementById('autoSave').checked) {
@@ -531,11 +539,13 @@ function spawnDuck(override) {
     }
 }
 
+/*
 document.addEventListener('keydown', function(key) {
     if (key.code == 'KeyQ') {
         spawnDuck(true)
     }
 })
+*/
 
 McCuenFace.onmouseenter = function() {expand()};
 McCuenFace.onmouseleave = function() {shrink()};
@@ -728,10 +738,7 @@ document.getElementById("buyCats").addEventListener('mouseover', function() {
 });
 
 
-var SETTINGSOPEN = [false];
-var SETTINGTHEMESOPEN = [false];
 document.getElementById('SETTINGSBUTTON').addEventListener('click', function() {
-    
     if (SETTINGSOPEN[0] == false) {
         document.getElementById('SETTINGSBUTTON').innerText = 'SETTINGS ▲'
         SETTINGSOPEN = [true];
@@ -746,27 +753,27 @@ document.getElementById('SETTINGSBUTTON').addEventListener('click', function() {
 })
 
 document.getElementById('THEMES').addEventListener('click', function() {
-            if (SETTINGTHEMESOPEN[0] == false) {
-                document.getElementById('THEMES').innerText = 'THEMES ▲'
-                document.getElementById('infoTHEMES').style.display = 'block';
-                SETTINGTHEMESOPEN = [true];
-                if (THEME == 'McCuen') {
-                    document.getElementById('McCuenTheme').disabled = true;
-                    document.getElementById('GarfieldTheme').disabled = false;
-                } else if (THEME == 'Garfield') {
-                    document.getElementById('GarfieldTheme').disabled = true;
-                    document.getElementById('McCuenTheme').disabled = false;
-                }
-            } else {
-                document.getElementById('THEMES').innerText = 'THEMES ▼'
-                SETTINGTHEMESOPEN = [false];
-                document.getElementById('infoTHEMES').style.display = 'none';
-            }
+    if (SETTINGTHEMESOPEN[0] == false) {
+        document.getElementById('THEMES').innerText = 'THEMES ▲'
+        document.getElementById('infoTHEMES').style.display = 'block';
+        SETTINGTHEMESOPEN = [true];
+        if (THEME[0] == 'McCuen') {
+            document.getElementById('McCuenTheme').disabled = true;
+            document.getElementById('GarfieldTheme').disabled = false;
+        } else if (THEME[0] == 'Garfield') {
+            document.getElementById('GarfieldTheme').disabled = true;
+            document.getElementById('McCuenTheme').disabled = false;
+        }
+    } else {
+        document.getElementById('THEMES').innerText = 'THEMES ▼'
+        SETTINGTHEMESOPEN = [false];
+        document.getElementById('infoTHEMES').style.display = 'none';
+    }
 });
 
 document.getElementById('McCuenTheme').addEventListener('click', function() {
     usedTheme = [McCuenTextWords]
-    THEME = 'McCuen'
+    THEME = ['McCuen']
     document.getElementById('SETTINGSBUTTON').click()
     document.body.background = 'Themes/McCuen/Background.png'
     document.getElementById('goldenDuck').src = "Themes/McCuen/GoldenThing.png"
@@ -820,10 +827,9 @@ document.getElementById('McCuenTheme').addEventListener('click', function() {
 });
 
 document.getElementById('GarfieldTheme').addEventListener('click', function() {
-
     // This part changes all the colors of the theme
     usedTheme = [GarfieldTextWords]
-    THEME = 'Garfield'
+    THEME = ['Garfield']
     document.getElementById('SETTINGSBUTTON').click()
     document.body.background = 'Themes/Garfield/Background.png'
     document.getElementById('goldenDuck').src = "Themes/Garfield/GoldenThing.png"
