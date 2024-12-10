@@ -1,17 +1,24 @@
+
 <!DOCTYPE html>
-<html lang="en" style="background-color: #000000;">
+<html lang="en" class="theme-McCuen" style="background-color: #000000;">
     
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="title">0 <ThemeText>CCps</ThemeText></title>
+    <title id="title">0 <span class="THEMETEXT">CCps</span></title>
     <link rel="stylesheet" href="clicker.css">
+    <!-- Include any necessary libraries -->
     <script src="clicker.js" defer></script>
 </head>
-<body background="Themes/McCuen/Background.png" style="background-repeat: no-repeat; background-size: cover;">
-    <div id='center_column' class='center_column' >
-        <img src="Themes/McCuen/GoldenThing.png" id="goldenDuck" style="display: none; z-index: 10; position: absolute">
-        <h1 id="goldenDuckMessage" style="display: none; z-index: 9;"><div id="buffName">buffName</div> <strong id="buffTime">00</strong>s left...</h1>
+
+<body background="Themes/McCuen/Background.png" class="theme-McCuen" style="background-repeat: no-repeat; background-size: cover;">
+
+    <div id='center_column' class='center_column'>
+        <img src="Themes/McCuen/GoldenThing.png" id="goldenDuck" style="display: none; z-index: 10; position: absolute; cursor: pointer;">
+        <h1 id="goldenDuckMessage" style="display: none; z-index: 9;">
+            <div id="buffName">buffName</div>
+            <strong id="buffTime">00</strong>s left...
+        </h1>
 
         <button id="SETTINGSBUTTON">SETTINGS ▼</button>
         <br>
@@ -19,20 +26,20 @@
             <button id="RESET">RESET</button>
             <br>
             <button id="THEMES">THEMES ▼</button>
-                <div id="infoTHEMES" style="top: -60px; background-color: rgb(77, 0, 0); outline: 2px solid rgb(0, 0, 0); display: none;">
-                        <br>
-                        <button id="McCuenTheme">McCuen</button>
-                        <br>
-                        <button id="GarfieldTheme">Garfield</button>
-                        <br>
-                </div>
+            <div id="infoTHEMES" style="top: -60px; background-color: rgb(77, 0, 0); outline: 2px solid rgb(0, 0, 0); display: none;">
+                <br>
+                <button id="McCuenTheme">McCuen</button>
+                <br>
+                <button id="GarfieldTheme">Garfield</button>
+                <br>
+            </div>
         </div>
 
-        <header><h1><ThemeText>McCuen</ThemeText> Clicker</h1></header>
+        <header><h1><span class="THEMETEXT">McCuen</span> Clicker</h1></header>
         <img src="Themes/McCuen/TheClicked.gif" 
-        alt="McCuen" id="McCuenFace" style="padding-top: 25px">
-        <h3 id="CCPS"></h3>
-        <h2><ThemeText>CuenCoins</ThemeText>:</h2>
+             alt="McCuen" id="McCuenFace" style="padding-top: 25px; cursor: pointer;">
+        <h3 id="CCPS">0 CCPS</h3>
+        <h2><span class="THEMETEXT">CuenCoins</span>:</h2>
         <h2 id="cuenCoins">0</h2>
         <button id="SAVE">SAVE</button>
         <br>
@@ -41,11 +48,11 @@
             
             <div id="mechs" >
                 <br>
-                <button id="buyMechs" class="building"><ThemeText>Mechanical Keyboards</ThemeText></button>
+                <button id="buyMechs" class="building"><span class="THEMETEXT">Mechanical Keyboards</span></button>
                 <div id="infoMechs" class="buildingInfoHidden">
                     <p>
-                        <strong id="ccpsMechs">0.1</strong> <ThemeText>CCPS</ThemeText> (<ThemeText>CuenCoins</ThemeText> per second)... 
-                        You currently have <strong id="numMechs">0</strong> <ThemeText>Mechanical Keyboards</ThemeText>.
+                        <strong id="ccpsMechs">0.1</strong> <span class="THEMETEXT">CCPS</span> (<span class="THEMETEXT">CuenCoins</span> per second)... 
+                        You currently have <strong id="numMechs">0</strong> <span class="THEMETEXT">Mechanical Keyboards</span>.
                         ($<strong id="costMechs">10</strong>)
                     </p>
                 </div>
@@ -53,11 +60,11 @@
             <br><br><br><br>
             <div id="teams" style="display: none;">
                 <br>
-                <button id="buyTeams" class="building" style="top: 1000px;"><ThemeText>Microsoft Teams</ThemeText></button>
-                <div id="infoTeams" class="buildingInfoHidden" style="top: -60px;">
+                <button id="buyTeams" class="building"><span class="THEMETEXT">Microsoft Teams</span></button>
+                <div id="infoTeams" class="buildingInfoHidden">
                     <p>
-                        <strong id="ccpsTeams">1</strong> <ThemeText>CCPS</ThemeText>... 
-                        You currently have <strong id="numTeams">0</strong> <ThemeText>Teams</ThemeText>.
+                        <strong id="ccpsTeams">1</strong> <span class="THEMETEXT">CCPS</span>... 
+                        You currently have <strong id="numTeams">0</strong> <span class="THEMETEXT">Teams</span>.
                         ($<strong id="costTeams">200</strong>)
                     </p>
                 </div>
@@ -65,17 +72,67 @@
             <br><br><br><br>
             <div id="cats" style="display: none;">
                 <br>
-                <button id="buyCats" class="building" style="top: 1100px;"><ThemeText>Cats</ThemeText></button>
-                <div id="infoCats" class="buildingInfoHidden" style="top: -60px;">
+                <button id="buyCats" class="building"><span class="THEMETEXT">Cats</span></button>
+                <div id="infoCats" class="buildingInfoHidden">
                     <p>
                         <strong id="ccpsCats">10</strong> CCPS... 
-                        You currently have <strong id="numCats">0</strong> <ThemeText>Cats</ThemeText>.
+                        You currently have <strong id="numCats">0</strong> <span class="THEMETEXT">Cats</span>.
                         ($<strong id="costCats">200000</strong>)
                     </p>
                 </div>
             </div>
         </store>
+
+        <!-- Boss Battle Modal -->
+        <div id="bossBattleModal">
+            <div id="bossBattleContent">
+                <!-- Game Overlay -->
+                <div id="bossOverlay">
+                    <h2>Boss Battle!</h2>
+                    <p id="bossStatus">Get ready for a challenge!</p>
+                    <button id="startBossBattle">Start Battle</button>
+                    <button id="exitBossBattle" style="display: none;">Exit Battle</button>
+                </div>
+                <!-- Games Containers -->
+                <div id="game1" class="game-container">
+                    <!-- Whack-a-Mole Game -->
+                    <h3>Whack-a-Mole</h3>
+                    <div id="whackAMoleGame">
+                        <div id="moleContainer">
+                            <!-- Moles will appear here -->
+                        </div>
+                        <p>Score: <span id="wackScore">0</span></p>
+                        <p>Time Left: <span id="wackTime">30</span>s</p>
+                    </div>
+                </div>
+                <div id="game2" class="game-container">
+                    <!-- Memory Match Game -->
+                    <h3>Memory Match</h3>
+                    <div id="memoryMatchGame">
+                        <div id="cardContainer">
+                            <!-- Cards will be generated here -->
+                        </div>
+                        <p>Pairs Matched: <span id="memoryScore">0</span></p>
+                        <p>Time Left: <span id="memoryTime">60</span>s</p>
+                    </div>
+                </div>
+                <div id="game3" class="game-container">
+                    <!-- Quick Reaction Game -->
+                    <h3>Quick Reaction</h3>
+                    <div id="quickReactionGame">
+                        <div id="target"></div>
+                        <p>Score: <span id="reactionScore">0</span></p>
+                        <p>Time Left: <span id="reactionTime">30</span>s</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <!-- Trigger Boss Battle Button -->
+    <button id="bossBattleTrigger" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; font-size: 16px; background-color: #ff6600; color: #fff; border: none; border-radius: 5px; cursor: pointer; z-index: 99; box-shadow: 0 0 15px rgba(255, 102, 0, 0.7); transition: background-color 0.3s, box-shadow 0 0 25px rgba(255, 102, 0, 0.9);">
+        Boss Battle
+    </button>
     
 </body>
 </html>
