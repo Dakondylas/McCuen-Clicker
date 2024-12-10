@@ -11,12 +11,27 @@ let teams = [(Number(localStorage['teams[0]'] || 0))];
 teams[1] = (Math.trunc(((1.3**teams[0]) * 200)));
 teams[2] = (1)
 
-let anteaters = [(Number(localStorage['anteaters[0]'] || 0))];
-anteaters[1] = (Math.trunc(((1.3**anteaters[0]) * 15000)));
-anteaters[2] = (10)
+let cats = [(Number(localStorage['cats[0]'] || 0))];
+cats[1] = (Math.trunc(((1.3**cats[0]) * 15000)));
+cats[2] = (10)
 let GarfieldTextWords = ['GPS', 'Gps', 'gps', 'Garfs', 'Garfield']
 let McCuenTextWords = ['CCPS', 'Ccps', 'ccps', 'CuenCoins', 'McCuen']
 let usedTheme = [McCuenTextWords];
+
+window.addEventListener('load', function() {
+    document.getElementById('STOREBUTTON').click()
+    expand()
+    setTimeout(function() {
+        shrink()
+        document.getElementById('STOREBUTTON').click()
+    }, 1)
+})
+
+function updateAbsoluteCCPS() {
+    return (((mechs[0]*mechs[2]) + 
+            (teams[0]*teams[2]) + 
+            (cats[0]*cats[2]))*ccpsMultiplier[0])
+};
 
 let unlockedBuildings = [];
 function updateOwnedBuildings() {
@@ -30,9 +45,9 @@ function updateOwnedBuildings() {
             unlockedBuildings.push('teams');
         };
     };
-    if (anteaters[0] > 0) {
-        if (unlockedBuildings.includes('anteaters') == false) {
-            unlockedBuildings.push('anteaters');
+    if (cats[0] > 0) {
+        if (unlockedBuildings.includes('cats') == false) {
+            unlockedBuildings.push('cats');
         };
     };
 };
@@ -45,7 +60,7 @@ let goldDuckStats = [(0.9*1/60), 60, 5]
 let goldDuckBuffs = ['Double CCPS', '10x Click Power', 'Free Random Building']
 // [chance of spawn per second, duration seconds, time before disapearing]
 // 50% chance of golden duck every 30 minutes (0.5(chance)/30(minutes)/60)
-// let goldDuckSpawnInterval = [setInterval(spawnDuck, 1000)];
+let goldDuckSpawnInterval = [setInterval(spawnDuck(), 1000)];
 
 cuenCoins.innerHTML = CUENCOINS;
 document.getElementById("title").innerHTML = (CUENCOINS + ` ${usedTheme[0][0]}`)
@@ -54,9 +69,7 @@ let previousCuenCoins = Number(CUENCOINS);
 let costMechs;
 let costTeams;
 let storeOpen = false;
-let absoluteCCPS = ((mechs[2] * mechs[0]) + 
-                   (teams[2] * teams[0]) +   
-                   (anteaters[0] * anteaters[2]));
+let absoluteCCPS = updateAbsoluteCCPS()
 let ticInterval = [];
 
 if (mechs[0] > 0) {
@@ -66,7 +79,7 @@ if (mechs[0] >= 10) {
     document.getElementById("teams").style.display = "block";
 };
 if (teams[0] >= 15) {
-    document.getElementById("anteaters").style.display = "block";
+    document.getElementById("cats").style.display = "block";
 };
 
 function expand() {
@@ -85,10 +98,11 @@ function save() {
     localStorage['CUENCOINS'] = String(CUENCOINS);
     localStorage['mechs[0]'] = String(mechs[0]);
     localStorage['teams[0]'] = String(teams[0]);
-    localStorage['anteaters[0]'] = String(anteaters[0]);
+    localStorage['cats[0]'] = String(cats[0]);
 };
 function RefreshInterval() {
     clearInterval(ticInterval[0]);
+    absoluteCCPS = updateAbsoluteCCPS()
     ticInterval[0] = setInterval(Tic, ((1000/ccpsMultiplier[0])/parseFloat(absoluteCCPS)));
     updateOwnedBuildings()
 };
@@ -102,11 +116,11 @@ function toggleStore() {
             document.getElementById("costTeams").innerHTML = teams[1]
             document.getElementById("ccpsTeams").innerHTML = teams[2]
             if (teams[0] >= 15) {
-                document.getElementById("anteaters").style.display = ""
-                document.getElementById("buyAnteaters").onclick = function() {buyAnteaters()};
-                document.getElementById("numAnteaters").innerHTML = anteaters[0]
-                document.getElementById("costAnteaters").innerHTML = anteaters[1]
-                document.getElementById("ccpsAnteaters").innerHTML = anteaters[2]
+                document.getElementById("cats").style.display = ""
+                document.getElementById("buyCats").onclick = function() {buyCats()};
+                document.getElementById("numCats").innerHTML = cats[0]
+                document.getElementById("costCats").innerHTML = cats[1]
+                document.getElementById("ccpsCats").innerHTML = cats[2]
             };
         };
         document.getElementById("STOREBUTTON").innerHTML = "STORE ▲";
@@ -129,7 +143,7 @@ function buyTeams() {
         cuenCoins.innerHTML = CUENCOINS;
 
         teams[0] = teams[0] + 1;
-        absoluteCCPS = ((mechs[0]*mechs[2]) + (teams[2]*teams[0]));
+        RefreshInterval()
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]} ` + absoluteCCPS.toFixed(1);
         teams[1] = Math.trunc(((1.3**teams[0]) * 200));
         storeOpen = false;
@@ -137,29 +151,71 @@ function buyTeams() {
         
         toggleStore();
     } else {
-        window.alert(`Not enough ${usedTheme[0][3]} :(` );
+        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+            const message = document.createElement('div');
+            message.id = 'notEnoughCuenCoinsMessage';
+            message.style.position = 'fixed';
+            message.style.top = '10%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, 0)';
+            message.style.backgroundColor = '#ffcccc';
+            message.style.padding = '10px 20px';
+            message.style.border = '2px solid #ff6666';
+            message.style.borderRadius = '5px';
+            message.style.color = '#990000';
+            message.style.fontSize = '16px';
+            message.style.fontWeight = 'bold';
+            message.style.zIndex = '1000';
+            message.innerText = `Not Enough ${usedTheme[3]}`;
+            document.body.appendChild(message);
+       
+            // Automatically remove the message after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        }
     };
 };
 
-function buyAnteaters() {
+function buyCats() {
     
-    if (CUENCOINS >= anteaters[1]) {
+    if (CUENCOINS >= cats[1]) {
         previousCuenCoins = CUENCOINS;
-        CUENCOINS = (previousCuenCoins - anteaters[1]);
+        CUENCOINS = (previousCuenCoins - cats[1]);
         cuenCoins.innerHTML = CUENCOINS;
 
-        anteaters[0] = anteaters[0] + 1;
-        absoluteCCPS = ((mechs[0]*mechs[2]) +
-                       (teams[2]*teams[0]) + 
-                       (anteaters[0]*anteaters[2]));
+        cats[0] = cats[0] + 1;
+        RefreshInterval()
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
-        anteaters[1] = Math.trunc(((1.3**anteaters[0]) * 15000));
+        cats[1] = Math.trunc(((1.3**cats[0]) * 15000));
         storeOpen = false;
         setTimeout(RefreshInterval(), 1);
         
         toggleStore();
     } else {
-        window.alert(`Not enough ${usedTheme[0][3]} :(`);
+        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+            const message = document.createElement('div');
+            message.id = 'notEnoughCuenCoinsMessage';
+            message.style.position = 'fixed';
+            message.style.top = '10%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, 0)';
+            message.style.backgroundColor = '#ffcccc';
+            message.style.padding = '10px 20px';
+            message.style.border = '2px solid #ff6666';
+            message.style.borderRadius = '5px';
+            message.style.color = '#990000';
+            message.style.fontSize = '16px';
+            message.style.fontWeight = 'bold';
+            message.style.zIndex = '1000';
+            message.innerText = `Not Enough ${usedTheme[3]}`;
+            document.body.appendChild(message);
+       
+            // Automatically remove the message after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        }
     };
 };
 
@@ -169,14 +225,36 @@ function buyMech() {
         CUENCOINS = (previousCuenCoins - mechs[1]);
         cuenCoins.innerHTML = CUENCOINS;
         mechs[0] = mechs[0] + 1;
-        absoluteCCPS = ((mechs[0]*mechs[2]) + (teams[0] * teams[2]));
+        RefreshInterval()
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1); 
         mechs[1] = Math.trunc(((1.3**mechs[0]) * 10));
         storeOpen = false; 
         setTimeout(RefreshInterval(), 1); 
         toggleStore(); 
     } else {
-        window.alert(`Not enough ${usedTheme[0][3]} :(`);
+        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+            const message = document.createElement('div');
+            message.id = 'notEnoughCuenCoinsMessage';
+            message.style.position = 'fixed';
+            message.style.top = '10%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, 0)';
+            message.style.backgroundColor = '#ffcccc';
+            message.style.padding = '10px 20px';
+            message.style.border = '2px solid #ff6666';
+            message.style.borderRadius = '5px';
+            message.style.color = '#990000';
+            message.style.fontSize = '16px';
+            message.style.fontWeight = 'bold';
+            message.style.zIndex = '1000';
+            message.innerText = `Not Enough ${usedTheme[3]}`;
+            document.body.appendChild(message);
+       
+            // Automatically remove the message after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        }
     };
 };
 if (absoluteCCPS > 0) {
@@ -195,88 +273,111 @@ function reset() {
     location.reload();
 };
 
-
+let effectActive = [false];
 function spawnDuck(override) {
     var duckClicked = false;
     let randomNumber = Math.random();
     if (randomNumber < goldDuckStats[0] || override) {
-        document.getElementById('goldenDuck').style.display = 'block';
-        document.getElementById('goldenDuck').style.left = `${((Math.random() * 0.8) * window.innerWidth)}px`;
-        document.getElementById('goldenDuck').style.top = `${((0.7*Math.random()) * window.innerHeight)}px`;
-        console.log(`window height: ${window.innerHeight}`)
-        console.log(`window width: ${window.innerWidth}`)
-        console.log(`duck height: ${document.getElementById('goldenDuck').style.top}`)
-        console.log(`duck width: ${document.getElementById('goldenDuck').style.left}`)
-        document.getElementById('goldenDuck').addEventListener('click', function() {
-            duckClicked = true;
-            document.getElementById('goldenDuck').style.display = 'none';
-            let randBuff = goldDuckBuffs[Math.floor(Math.random() * goldDuckBuffs.length)];
-            if (randBuff == 'Double CCPS') {
-                let tempCcpsMultiply = ccpsMultiplier[0]/2;
-                ccpsMultiplier[0] = tempCcpsMultiply;
-                RefreshInterval()
-                let xTimer = goldDuckStats[1];
-                document.getElementById('goldenDuckMessage').style.display = 'block';
-                document.getElementById('buffName').innerHTML = "Double CCPS";
-                let effectDuration = setInterval(function() {
-                    document.getElementById('buffTime').innerHTML = xTimer;
-                    xTimer -= 1;
-                    if (xTimer == 0) {
-                        clearXTimer()
-                    }
-                }, 1000);
-                function clearXTimer() {
-                    clearInterval(effectDuration);
-                    document.getElementById('goldenDuckMessage').style.display = 'block';
-                    ccpsMultiplier[0] = tempCcpsMultiply*2
-                };
-            } else if (randBuff == '10x Click Power') {
-                let tempClickMultiply = clickAmount[0]*10;
-                clickAmount[0] = tempClickMultiply;
-                let xTimer = goldDuckStats[1];
-                document.getElementById('goldenDuckMessage').style.display = 'block';
-                document.getElementById('buffName').innerHTML = "10x Click Power";
-                let effectDuration = setInterval(function() {
-                    document.getElementById('buffTime').innerHTML = xTimer;
-                    xTimer -= 1;
-                    if (xTimer == 0) {
-                        clearXTimer();   
-                    };
-                }, 1000)
-                function clearXTimer() {
-                    clearInterval(effectDuration);
-                    document.getElementById('goldenDuckMessage').style.display = 'block';
-                    clickAmount[0] = tempCcpsMultiply/10
-                };
-            } else if (randBuff == 'Free Random Building') {
-                let randBuildingIndex = Math.floor(Math.random()*unlockedBuildings.length)
-                if (unlockedBuildings[randBuildingIndex] == 'mechs') {
-                    previousCuenCoins = CUENCOINS;
-                    CUENCOINS = (previousCuenCoins + mechs[1]);
-                    buyMech()
-                } else if (unlockedBuildings[randBuildingIndex] == 'teams') {
-                    previousCuenCoins = CUENCOINS;
-                    CUENCOINS = (previousCuenCoins + teams[1]);
-                    buyTeams()
-                } else if (unlockedBuildings[randBuildingIndex] == 'anteaters') {
-                    previousCuenCoins = CUENCOINS;
-                    CUENCOINS = (previousCuenCoins + anteaters[1]);
-                    buyAnteaters()
-                };
-                document.getElementById('goldenDuckMessage').style.display = 'block';
-                document.getElementById('buffName').innerHTML = "Free Random Building";
-                document.getElementById('buffTime').innerHTML = '';
-                let effectDuration = setTimeout(function() {
-                    document.getElementById('goldenDuckMessage').style.display = 'none';
-                    document.getElementById('buffTime').innerHTML = '00';
-                }, 1000);
-            }
-        })
-        setTimeout(function() {
-            if (duckClicked == false) {
+        if (!effectActive[0]) {
+            document.getElementById('goldenDuck').style.display = 'block';
+            document.getElementById('goldenDuck').style.left = `${((Math.random() * 0.8) * window.innerWidth)}px`;
+            document.getElementById('goldenDuck').style.top = `${((0.7*Math.random()) * window.innerHeight)}px`;
+            document.getElementById('goldenDuck').addEventListener('click', function() {
+                duckClicked = true;
+                effectActive[0] = true;
+                document.getElementById('STOREBUTTON').style.marginBottom = '0px'
+                document.getElementById('buyTeams').style.marginTop = '200px'
+                document.getElementById('buyCats').style.marginTop = '200px'
+                document.getElementById('STOREBUTTON').click()
+                expand()
+                setTimeout(function() {
+                    shrink()
+                    document.getElementById('STOREBUTTON').click()
+                }, 1)
                 document.getElementById('goldenDuck').style.display = 'none';
-            }
-        }, goldDuckStats[2]*1000);
+                let randBuff = goldDuckBuffs[Math.floor(Math.random() * goldDuckBuffs.length)];
+                if (randBuff == 'Double CCPS') {
+                    let tempCcpsMultiply = ccpsMultiplier[0]*2;
+                    ccpsMultiplier = [tempCcpsMultiply];
+                    RefreshInterval()
+                    let xTimer = goldDuckStats[1];
+                    document.getElementById('goldenDuckMessage').style.display = 'block';
+                    document.getElementById('buffName').innerHTML = "Double CCPS";
+                    document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
+                    let effectDuration = setInterval(function() {
+                        document.getElementById('buffTime').innerHTML = xTimer;
+                        xTimer -= 1;
+                        console.log('2x Multipliers: ', xTimer)
+                    }, 1000);
+                    setTimeout(function() {
+                        clearInterval(effectDuration);
+                        document.getElementById('STOREBUTTON').style.marginBottom = '0px'
+                        document.getElementById('buyTeams').style.marginTop = '0px'
+                        document.getElementById('buyCats').style.marginTop = '0px'
+                        document.getElementById('goldenDuckMessage').style.display = 'none';
+                        ccpsMultiplier[0] = tempCcpsMultiply/2
+                        RefreshInterval()
+                        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
+                        effectActive[0] = false
+                    }, 1000*goldDuckStats[1])
+                } else if (randBuff == '10x Click Power') {
+                    // window.alert(clickAmount[0])
+                    let tempClickMultiply = clickAmount[0]*10;
+                    clickAmount[0] = tempClickMultiply;
+                    // window.alert(clickAmount[0])
+                    let xTimer = goldDuckStats[1];
+                    document.getElementById('goldenDuckMessage').style.display = 'block';
+                    document.getElementById('buffName').innerHTML = "10x Click Power";
+                    let effectDuration = setInterval(function() {
+                        document.getElementById('buffTime').innerHTML = xTimer;
+                        xTimer -= 1;
+                        console.log('10x Multiplier: ', xTimer)
+                    }, 1000)
+                    setTimeout(function() {
+                        clearInterval(effectDuration);
+                        document.getElementById('STOREBUTTON').style.marginBottom = '0px'
+                        document.getElementById('buyTeams').style.marginTop = '0px'
+                        document.getElementById('buyCats').style.marginTop = '0px'
+                        document.getElementById('goldenDuckMessage').style.display = 'none';
+                        // window.alert(tempClickMultiply)
+                        clickAmount[0] = tempClickMultiply/10
+                        // window.alert(clickAmount[0])
+                        effectActive[0] = false
+                    }, 1000*goldDuckStats[1])
+                } else if (randBuff == 'Free Random Building') {
+                    let randBuildingIndex = Math.floor(Math.random()*unlockedBuildings.length)
+                    if (unlockedBuildings[randBuildingIndex] == 'mechs') {
+                        previousCuenCoins = CUENCOINS;
+                        CUENCOINS = (previousCuenCoins + mechs[1]);
+                        buyMech()
+                    } else if (unlockedBuildings[randBuildingIndex] == 'teams') {
+                        previousCuenCoins = CUENCOINS;
+                        CUENCOINS = (previousCuenCoins + teams[1]);
+                        buyTeams()
+                    } else if (unlockedBuildings[randBuildingIndex] == 'cats') {
+                        previousCuenCoins = CUENCOINS;
+                        CUENCOINS = (previousCuenCoins + cats[1]);
+                        buyCats()
+                    };
+                    document.getElementById('goldenDuckMessage').style.display = 'block';
+                    document.getElementById('buffName').innerHTML = "Free Random Building";
+                    document.getElementById('buffTime').innerHTML = '';
+                    setTimeout(function() {
+                        document.getElementById('STOREBUTTON').style.marginBottom = '0px'
+                        document.getElementById('buyTeams').style.marginTop = '0px'
+                        document.getElementById('buyCats').style.marginTop = '0px'
+                        document.getElementById('goldenDuckMessage').style.display = 'none';
+                        effectActive[0] = false
+                    }, 1000);
+                }
+            })
+            setTimeout(function() {
+                if (duckClicked == false) {
+                    document.getElementById('goldenDuck').style.display = 'none';
+                }
+            }, goldDuckStats[2]*1000);
+        }
+        
     }
 }
 
@@ -444,11 +545,11 @@ document.getElementById("buyTeams").addEventListener('mouseover', function() {
     document.getElementById("buyTeams").addEventListener('mouseout', remBuilding);
 });
 
-document.getElementById("buyAnteaters").addEventListener('mouseover', function() {
-    addBuildingParam = ["anteaters", "infoAnteater", "infoAnteaters"];
-    remBuildingParam = ["anteaters", "infoAnteater", "infoAnteaters"];
+document.getElementById("buyCats").addEventListener('mouseover', function() {
+    addBuildingParam = ["cats", "infoCat", "infoCats"];
+    remBuildingParam = ["cats", "infoCat", "infoCats"];
     addBuilding();
-    document.getElementById("buyAnteaters").addEventListener('mouseout', remBuilding);
+    document.getElementById("buyCats").addEventListener('mouseout', remBuilding);
 });
 
 
