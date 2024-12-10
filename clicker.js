@@ -4,19 +4,27 @@ let CUENCOINS = Number(localStorage['CUENCOINS'] || 0);
 
 // building stats [amount owned, cost, CCPS]
 let mechs = [(Number(localStorage['mechs[0]'] || 0))];
-mechs[1] = (Math.trunc(((1.3**mechs[0]) * 10)));
+mechs[1] = (Math.trunc(((1.15**mechs[0]) * 10)));
 mechs[2] = (0.1);
 
 let teams = [(Number(localStorage['teams[0]'] || 0))];
-teams[1] = (Math.trunc(((1.3**teams[0]) * 200)));
+teams[1] = (Math.trunc(((1.15**teams[0]) * 200)));
 teams[2] = (1)
 
 let cats = [(Number(localStorage['cats[0]'] || 0))];
-cats[1] = (Math.trunc(((1.3**cats[0]) * 15000)));
+cats[1] = (Math.trunc(((1.15**cats[0]) * 15000)));
 cats[2] = (10)
 let GarfieldTextWords = ['GPS', 'Gps', 'gps', 'Garfs', 'Garfield']
 let McCuenTextWords = ['CCPS', 'Ccps', 'ccps', 'CuenCoins', 'McCuen']
-let usedTheme = [McCuenTextWords];
+let usedTheme = []
+if (THEME == 'McCuen') {
+    usedTheme = [McCuenTextWords];
+} else {
+    usedTheme = [GarfieldTextWords];
+}
+
+
+let autoSaveEnabled = (localStorage['autoSave'] || 'on')
 
 window.addEventListener('load', function() {
     document.getElementById('STOREBUTTON').click()
@@ -56,11 +64,11 @@ updateOwnedBuildings()
 let clickAmount = [1]
 let ccpsMultiplier = [1];
 
-let goldDuckStats = [(0.9*1/60), 60, 5] 
+let goldDuckStats = [(0.5/5/60), 15, 5] 
 let goldDuckBuffs = ['Double CCPS', '10x Click Power', 'Free Random Building']
 // [chance of spawn per second, duration seconds, time before disapearing]
 // 50% chance of golden duck every 30 minutes (0.5(chance)/30(minutes)/60)
-let goldDuckSpawnInterval = [setInterval(spawnDuck(), 1000)];
+let goldDuckSpawnInterval = [setInterval(spawnDuck, 1000)];
 
 cuenCoins.innerHTML = CUENCOINS;
 document.getElementById("title").innerHTML = (CUENCOINS + ` ${usedTheme[0][0]}`)
@@ -82,6 +90,72 @@ if (teams[0] >= 15) {
     document.getElementById("cats").style.display = "block";
 };
 
+if (autoSaveEnabled == 'on') {
+    document.getElementById('autoSave').checked = true;
+    let autoSaveInterval = [setInterval(function() {
+        if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+            const message = document.createElement('div');
+            message.id = 'notEnoughCuenCoinsMessage';
+            message.style.position = 'fixed';
+            message.style.top = '10%';
+            message.style.left = '50%';
+            message.style.transform = 'translate(-50%, 0)';
+            message.style.backgroundColor = '#dddddd';
+            message.style.padding = '10px 20px';
+            message.style.border = '2px solid #555555';
+            message.style.borderRadius = '5px';
+            message.style.color = '#000000';
+            message.style.fontSize = '16px';
+            message.style.fontWeight = 'bold';
+            message.style.zIndex = '1000';
+            message.innerText = `Auto-Saved...`;
+            document.body.appendChild(message);
+       
+            // Automatically remove the message after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 3000);
+        }
+        save()
+    }, 60000)]
+}
+document.getElementById('autoSave').addEventListener('click', function() {
+    if (document.getElementById('autoSave').checked) {
+        autoSaveEnabled = 'on'
+        save()
+        let autoSaveInterval = [setInterval(function() {
+            if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+                const message = document.createElement('div');
+                message.id = 'notEnoughCuenCoinsMessage';
+                message.style.position = 'fixed';
+                message.style.top = '10%';
+                message.style.left = '50%';
+                message.style.transform = 'translate(-50%, 0)';
+                message.style.backgroundColor = '#dddddd';
+                message.style.padding = '10px 20px';
+                message.style.border = '2px solid #555555';
+                message.style.borderRadius = '5px';
+                message.style.color = '#000000';
+                message.style.fontSize = '16px';
+                message.style.fontWeight = 'bold';
+                message.style.zIndex = '1000';
+                message.innerText = `Auto-Saved...`;
+                document.body.appendChild(message);
+           
+                // Automatically remove the message after 3 seconds
+                setTimeout(() => {
+                    document.body.removeChild(message);
+                }, 3000);
+            }
+            save()
+        }, 60000)]
+    } else {
+        autoSaveEnabled = 'off'
+        save()
+        clearInterval(autoSaveInterval[0]);
+    }
+})
+
 function expand() {
     McCuenFace.style = "width: 450px";
 };
@@ -99,6 +173,16 @@ function save() {
     localStorage['mechs[0]'] = String(mechs[0]);
     localStorage['teams[0]'] = String(teams[0]);
     localStorage['cats[0]'] = String(cats[0]);
+    if (THEME == 'McCuen') {
+        localStorage['THEME'] = 'McCuen'
+    } else if (THEME == 'Garfield') {
+        localStorage['THEME'] = 'Garfield'
+    }
+    if (document.getElementById('autoSave').checked) {
+        localStorage['autoSave'] = 'on'
+    } else {
+        localStorage['autoSave'] = 'off'
+    }
 };
 function RefreshInterval() {
     clearInterval(ticInterval[0]);
@@ -166,7 +250,7 @@ function buyTeams() {
             message.style.fontSize = '16px';
             message.style.fontWeight = 'bold';
             message.style.zIndex = '1000';
-            message.innerText = `Not Enough ${usedTheme[3]}`;
+            message.innerText = `Not Enough ${usedTheme[0][3]}`;
             document.body.appendChild(message);
        
             // Automatically remove the message after 3 seconds
@@ -208,7 +292,7 @@ function buyCats() {
             message.style.fontSize = '16px';
             message.style.fontWeight = 'bold';
             message.style.zIndex = '1000';
-            message.innerText = `Not Enough ${usedTheme[3]}`;
+            message.innerText = `Not Enough ${usedTheme[0][3]}`;
             document.body.appendChild(message);
        
             // Automatically remove the message after 3 seconds
@@ -247,7 +331,7 @@ function buyMech() {
             message.style.fontSize = '16px';
             message.style.fontWeight = 'bold';
             message.style.zIndex = '1000';
-            message.innerText = `Not Enough ${usedTheme[3]}`;
+            message.innerText = `Not Enough ${usedTheme[0][3]}`;
             document.body.appendChild(message);
        
             // Automatically remove the message after 3 seconds
@@ -266,11 +350,67 @@ function Tic() {
     cuenCoins.innerHTML = CUENCOINS;    
     document.getElementById("title").innerHTML = (CUENCOINS + ` ${usedTheme[0][0]}`);    
 };
+
 function reset() {
-    localStorage['CUENCOINS'] = String(0);
-    localStorage['mechs[0]'] = String(0);
-    localStorage['teams[0]'] = String(0);
-    location.reload();
+    if (!document.getElementById('resetConfirmationMessage')) {
+        let buttons = document.querySelectorAll('button');
+        buttons.forEach(element => {
+            element.disabled = true;
+        })
+        let inputs = document.querySelectorAll('input');
+        inputs.forEach(element => {
+            element.disabled = true;
+        })
+        const message = document.createElement('div');
+        message.id = 'resetConfirmationMessage';
+        message.style.position = 'fixed';
+        message.style.top = '50%';
+        message.style.left = '50%';
+        message.style.transform = 'translate(-50%, 0)';
+        message.style.backgroundColor = '#dddddd';
+        message.style.padding = '10px 20px';
+        message.style.border = '5px solid #ff5555';
+        message.style.borderRadius = '5px';
+        message.style.color = '#000000';
+        message.style.fontSize = '25px';
+        message.style.fontWeight = 'bold';
+        message.style.zIndex = '1000';
+        message.innerText = `Are you sure you want to reset?`;
+        const confYes = document.createElement('button')
+        confYes.innerText = 'Yes'
+        confYes.id = 'confYes'
+        const confNo = document.createElement('button')
+        const confLineBreak = document.createElement('br')
+        confNo.innerText = 'No'
+        confNo.id = 'confNo'
+        message.appendChild(confYes)
+        message.append(confLineBreak)
+        message.append(confLineBreak)
+        message.appendChild(confNo)
+        document.body.appendChild(message);
+   
+        document.getElementById('confNo').addEventListener('click', function() {
+            document.body.removeChild(message);
+            let buttons = document.querySelectorAll('button');
+            buttons.forEach(element => {
+                element.disabled = false;
+            })
+            let inputs = document.querySelectorAll('input');
+            inputs.forEach(element => {
+                element.disabled = false;
+            })
+            document.getElementById('SETTINGSBUTTON').click()
+        })
+
+        document.getElementById('confYes').addEventListener('click', function() {
+            localStorage['CUENCOINS'] = String(0);
+            localStorage['mechs[0]'] = String(0);
+            localStorage['teams[0]'] = String(0);
+            location.reload();
+            document.body.removeChild(message);
+        })
+    }
+    
 };
 
 let effectActive = [false];
@@ -284,7 +424,6 @@ function spawnDuck(override) {
             document.getElementById('goldenDuck').style.top = `${((0.7*Math.random()) * window.innerHeight)}px`;
             document.getElementById('goldenDuck').addEventListener('click', function() {
                 duckClicked = true;
-                effectActive[0] = true;
                 document.getElementById('STOREBUTTON').style.marginBottom = '0px'
                 document.getElementById('buyTeams').style.marginTop = '200px'
                 document.getElementById('buyCats').style.marginTop = '200px'
@@ -297,78 +436,89 @@ function spawnDuck(override) {
                 document.getElementById('goldenDuck').style.display = 'none';
                 let randBuff = goldDuckBuffs[Math.floor(Math.random() * goldDuckBuffs.length)];
                 if (randBuff == 'Double CCPS') {
-                    let tempCcpsMultiply = ccpsMultiplier[0]*2;
-                    ccpsMultiplier = [tempCcpsMultiply];
-                    RefreshInterval()
-                    let xTimer = goldDuckStats[1];
-                    document.getElementById('goldenDuckMessage').style.display = 'block';
-                    document.getElementById('buffName').innerHTML = "Double CCPS";
-                    document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
-                    let effectDuration = setInterval(function() {
-                        document.getElementById('buffTime').innerHTML = xTimer;
-                        xTimer -= 1;
-                        console.log('2x Multipliers: ', xTimer)
-                    }, 1000);
-                    setTimeout(function() {
-                        clearInterval(effectDuration);
-                        document.getElementById('STOREBUTTON').style.marginBottom = '0px'
-                        document.getElementById('buyTeams').style.marginTop = '0px'
-                        document.getElementById('buyCats').style.marginTop = '0px'
-                        document.getElementById('goldenDuckMessage').style.display = 'none';
-                        ccpsMultiplier[0] = tempCcpsMultiply/2
+                    if (!effectActive[0]) {
+                        effectActive[0] = true;
+                        let tempCcpsMultiply = ccpsMultiplier[0]*2;
+                        ccpsMultiplier = [tempCcpsMultiply];
                         RefreshInterval()
-                        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
-                        effectActive[0] = false
-                    }, 1000*goldDuckStats[1])
-                } else if (randBuff == '10x Click Power') {
-                    // window.alert(clickAmount[0])
-                    let tempClickMultiply = clickAmount[0]*10;
-                    clickAmount[0] = tempClickMultiply;
-                    // window.alert(clickAmount[0])
-                    let xTimer = goldDuckStats[1];
-                    document.getElementById('goldenDuckMessage').style.display = 'block';
-                    document.getElementById('buffName').innerHTML = "10x Click Power";
-                    let effectDuration = setInterval(function() {
+                        let xTimer = goldDuckStats[1];
                         document.getElementById('buffTime').innerHTML = xTimer;
-                        xTimer -= 1;
-                        console.log('10x Multiplier: ', xTimer)
-                    }, 1000)
-                    setTimeout(function() {
-                        clearInterval(effectDuration);
-                        document.getElementById('STOREBUTTON').style.marginBottom = '0px'
-                        document.getElementById('buyTeams').style.marginTop = '0px'
-                        document.getElementById('buyCats').style.marginTop = '0px'
-                        document.getElementById('goldenDuckMessage').style.display = 'none';
-                        // window.alert(tempClickMultiply)
-                        clickAmount[0] = tempClickMultiply/10
-                        // window.alert(clickAmount[0])
-                        effectActive[0] = false
-                    }, 1000*goldDuckStats[1])
-                } else if (randBuff == 'Free Random Building') {
-                    let randBuildingIndex = Math.floor(Math.random()*unlockedBuildings.length)
-                    if (unlockedBuildings[randBuildingIndex] == 'mechs') {
-                        previousCuenCoins = CUENCOINS;
-                        CUENCOINS = (previousCuenCoins + mechs[1]);
-                        buyMech()
-                    } else if (unlockedBuildings[randBuildingIndex] == 'teams') {
-                        previousCuenCoins = CUENCOINS;
-                        CUENCOINS = (previousCuenCoins + teams[1]);
-                        buyTeams()
-                    } else if (unlockedBuildings[randBuildingIndex] == 'cats') {
-                        previousCuenCoins = CUENCOINS;
-                        CUENCOINS = (previousCuenCoins + cats[1]);
-                        buyCats()
+                        document.getElementById('goldenDuckMessage').style.display = 'block';
+                        document.getElementById('buffName').innerHTML = "Double CCPS";
+                        document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
+                        let effectDuration = setInterval(function() {
+                            document.getElementById('buffTime').innerHTML = xTimer-1;
+                            xTimer -= 1;
+                            console.log('2x Multipliers: ', xTimer-1)
+                        }, 1000);
+                        setTimeout(function() {
+                            clearInterval(effectDuration);
+                            document.getElementById('STOREBUTTON').style.marginBottom = '0px'
+                            document.getElementById('buyTeams').style.marginTop = '0px'
+                            document.getElementById('buyCats').style.marginTop = '0px'
+                            document.getElementById('goldenDuckMessage').style.display = 'none';
+                            ccpsMultiplier[0] = tempCcpsMultiply/2
+                            RefreshInterval()
+                            document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
+                            effectActive[0] = false
+                        }, 1000*goldDuckStats[1])
                     };
-                    document.getElementById('goldenDuckMessage').style.display = 'block';
-                    document.getElementById('buffName').innerHTML = "Free Random Building";
-                    document.getElementById('buffTime').innerHTML = '';
-                    setTimeout(function() {
-                        document.getElementById('STOREBUTTON').style.marginBottom = '0px'
-                        document.getElementById('buyTeams').style.marginTop = '0px'
-                        document.getElementById('buyCats').style.marginTop = '0px'
-                        document.getElementById('goldenDuckMessage').style.display = 'none';
-                        effectActive[0] = false
-                    }, 1000);
+                } else if (randBuff == '10x Click Power') {
+                    if (!effectActive[0]) {
+                        effectActive[0] = true;
+                        // window.alert(clickAmount[0])
+                        let tempClickMultiply = clickAmount[0]*10;
+                        clickAmount[0] = tempClickMultiply;
+                        // window.alert(clickAmount[0])
+                        let xTimer = goldDuckStats[1];
+                        document.getElementById('buffTime').innerHTML = xTimer;
+                        document.getElementById('goldenDuckMessage').style.display = 'block';
+                        document.getElementById('buffName').innerHTML = "10x Click Power";
+                        let effectDuration = setInterval(function() {
+                            document.getElementById('buffTime').innerHTML = xTimer-1;
+                            xTimer -= 1;
+                            console.log('10x Multiplier: ', xTimer)
+                        }, 1000)
+                        setTimeout(function() {
+                            clearInterval(effectDuration);
+                            document.getElementById('STOREBUTTON').style.marginBottom = '0px'
+                            document.getElementById('buyTeams').style.marginTop = '0px'
+                            document.getElementById('buyCats').style.marginTop = '0px'
+                            document.getElementById('goldenDuckMessage').style.display = 'none';
+                            // window.alert(tempClickMultiply)
+                            clickAmount[0] = tempClickMultiply/10
+                            // window.alert(clickAmount[0])
+                            effectActive[0] = false
+                        }, 1000*goldDuckStats[1])
+                    };
+                } else if (randBuff == 'Free Random Building') {
+                    if (!effectActive[0]) {
+                        effectActive[0] = true;
+                        let randBuildingIndex = Math.floor(Math.random()*unlockedBuildings.length)
+                        if (unlockedBuildings[randBuildingIndex] == 'mechs') {
+                            previousCuenCoins = CUENCOINS;
+                            CUENCOINS = (previousCuenCoins + mechs[1]);
+                            buyMech()
+                        } else if (unlockedBuildings[randBuildingIndex] == 'teams') {
+                            previousCuenCoins = CUENCOINS;
+                            CUENCOINS = (previousCuenCoins + teams[1]);
+                            buyTeams()
+                        } else if (unlockedBuildings[randBuildingIndex] == 'cats') {
+                            previousCuenCoins = CUENCOINS;
+                            CUENCOINS = (previousCuenCoins + cats[1]);
+                            buyCats()
+                        };
+                        document.getElementById('goldenDuckMessage').style.display = 'block';
+                        document.getElementById('buffName').innerHTML = "Free Random Building";
+                        document.getElementById('buffTime').innerHTML = '';
+                        setTimeout(function() {
+                            document.getElementById('STOREBUTTON').style.marginBottom = '0px'
+                            document.getElementById('buyTeams').style.marginTop = '0px'
+                            document.getElementById('buyCats').style.marginTop = '0px'
+                            document.getElementById('goldenDuckMessage').style.display = 'none';
+                            effectActive[0] = false
+                        }, 1000);
+                    }
                 }
             })
             setTimeout(function() {
@@ -390,7 +540,32 @@ document.addEventListener('keydown', function(key) {
 McCuenFace.onmouseenter = function() {expand()};
 McCuenFace.onmouseleave = function() {shrink()};
 McCuenFace.onclick = function() {click()};
-document.getElementById("SAVE").onclick = function() {save()};
+document.getElementById("SAVE").addEventListener('click', function() {
+    if (!document.getElementById('notEnoughCuenCoinsMessage')) {
+        const message = document.createElement('div');
+        message.id = 'notEnoughCuenCoinsMessage';
+        message.style.position = 'fixed';
+        message.style.top = '10%';
+        message.style.left = '50%';
+        message.style.transform = 'translate(-50%, 0)';
+        message.style.backgroundColor = '#dddddd';
+        message.style.padding = '10px 20px';
+        message.style.border = '2px solid #555555';
+        message.style.borderRadius = '5px';
+        message.style.color = '#000000';
+        message.style.fontSize = '16px';
+        message.style.fontWeight = 'bold';
+        message.style.zIndex = '1000';
+        message.innerText = `Saved`;
+        document.body.appendChild(message);
+   
+        // Automatically remove the message after 3 seconds
+        setTimeout(() => {
+            document.body.removeChild(message);
+        }, 3000);
+    }
+    save()
+});
 document.getElementById("STOREBUTTON").onclick = function() {toggleStore()};
 document.getElementById("RESET").onclick = function() {reset()};
 
@@ -556,10 +731,13 @@ document.getElementById("buyCats").addEventListener('mouseover', function() {
 var SETTINGSOPEN = [false];
 var SETTINGTHEMESOPEN = [false];
 document.getElementById('SETTINGSBUTTON').addEventListener('click', function() {
+    
     if (SETTINGSOPEN[0] == false) {
+        document.getElementById('SETTINGSBUTTON').innerText = 'SETTINGS ▲'
         SETTINGSOPEN = [true];
         document.getElementById('SETTINGSMENU').style.display = 'block';
     } else {
+        document.getElementById('SETTINGSBUTTON').innerText = 'SETTINGS ▼'
         document.getElementById('SETTINGSMENU').style.display = 'none';
         document.getElementById('infoTHEMES').style.display = 'none';
         SETTINGTHEMESOPEN = [false];
@@ -569,6 +747,7 @@ document.getElementById('SETTINGSBUTTON').addEventListener('click', function() {
 
 document.getElementById('THEMES').addEventListener('click', function() {
             if (SETTINGTHEMESOPEN[0] == false) {
+                document.getElementById('THEMES').innerText = 'THEMES ▲'
                 document.getElementById('infoTHEMES').style.display = 'block';
                 SETTINGTHEMESOPEN = [true];
                 if (THEME == 'McCuen') {
@@ -579,6 +758,7 @@ document.getElementById('THEMES').addEventListener('click', function() {
                     document.getElementById('McCuenTheme').disabled = false;
                 }
             } else {
+                document.getElementById('THEMES').innerText = 'THEMES ▼'
                 SETTINGTHEMESOPEN = [false];
                 document.getElementById('infoTHEMES').style.display = 'none';
             }
@@ -630,7 +810,11 @@ document.getElementById('McCuenTheme').addEventListener('click', function() {
             element.textContent = 'Microsoft Teams'
         } else if (element.textContent == 'fingers') {
             element.textContent = 'Teams'
-        } 
+        } else if (element.textContent == 'Pizzas from Vito') {
+            element.textContent = 'Cats'
+        } else if (element.textContent == 'pizzas') {
+            element.textContent = 'cats'
+        }
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
     })
 });
@@ -684,6 +868,10 @@ document.getElementById('GarfieldTheme').addEventListener('click', function() {
             element.textContent = 'Fingers'
         } else if (element.textContent == 'Teams') {
             element.textContent = 'fingers'
+        } else if (element.textContent == 'Cats') {
+            element.textContent = 'Pizzas from Vito'
+        } else if (element.textContent == 'cats') {
+            element.textContent = 'pizzas'
         } 
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
     })

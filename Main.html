@@ -4,18 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="title">0 <ThemeText>CCps</ThemeText></title>
+    <title id="title">0</title>
     <link rel="stylesheet" href="clicker.css">
     <script src="clicker.js" defer></script>
 </head>
 <body background="Themes/McCuen/Background.png" style="background-repeat: no-repeat; background-size: cover;">
     <div id='center_column' class='center_column' >
         <img src="Themes/McCuen/GoldenThing.png" id="goldenDuck" style="display: none; z-index: 10; position: absolute">
-        <h1 id="goldenDuckMessage" style="display: none; z-index: 9;"><div id="buffName">buffName</div> <strong id="buffTime">00</strong>s left...</h1>
+        <h1 id="goldenDuckMessage" style="display: none; z-index: 9;"><div id="buffName">buffName</div> <strong id="buffTime">00</strong></h1>
 
         <button id="SETTINGSBUTTON">SETTINGS ▼</button>
         <br>
         <div id="SETTINGSMENU" style="display: none; z-index: 3; position: absolute; left: 46.5%; background-color: red; outline: 4px solid black; padding: 25px;">
+            <button id="SAVE">SAVE</button>
+            <input type="checkbox" id="autoSave">
+            <label for="autoSave">Auto-Save</label>
+            <br>
+            <br>
             <button id="RESET">RESET</button>
             <br>
             <button id="THEMES">THEMES ▼</button>
@@ -27,14 +32,12 @@
                         <br>
                 </div>
         </div>
-
         <header><h1><ThemeText>McCuen</ThemeText> Clicker</h1></header>
         <img src="Themes/McCuen/TheClicked.gif" 
         alt="McCuen" id="McCuenFace" style="padding-top: 25px">
         <h3 id="CCPS"></h3>
         <h2><ThemeText>CuenCoins</ThemeText>:</h2>
         <h2 id="cuenCoins">0</h2>
-        <button id="SAVE">SAVE</button>
         <br>
         <button id="STOREBUTTON">STORE ▼</button>
         <store id="STORE" style="display:none;">
