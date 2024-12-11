@@ -220,13 +220,22 @@ function botCheckAttackRange() {
 
 function checkGameOver() {
     if (playerHealth <= 0) {
-        alert('You Lost! Game Over.');
-        resetGame();
+        setTimeout(() => {
+            alert('You Lost! Game Over.');  
+        }, 1000);
+        setTimeout(() => {
+            window.location.href = '../main.html';
+        }, 1000); // Delay for 2 seconds before redirecting
     } else if (botHealth <= 0) {
-        alert('You Won! Congratulations!');
-        resetGame();
+        setTimeout(() => {
+            alert('You Won! Congratulations!'); 
+        }, 1000);
+        setTimeout(() => {
+            window.location.href = '../main.html';
+        }, 1000);
     }
 }
+
 
 function resetGame() {
     playerHealth = 150;
