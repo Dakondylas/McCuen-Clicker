@@ -7,6 +7,7 @@ let mechs = [(Number(localStorage['mechs[0]'] || 0))];
 mechs[1] = (Math.trunc(((1.15**mechs[0]) * 10)));
 mechs[2] = (0.1);
 
+
 let teams = [(Number(localStorage['teams[0]'] || 0))];
 teams[1] = (Math.trunc(((1.15**teams[0]) * 200)));
 teams[2] = (1)
@@ -32,6 +33,7 @@ if (THEME[0] == 'McCuen') {
 }
 
 
+
 let autoSaveEnabled = (localStorage['autoSave'] || 'on')
 
 window.addEventListener('load', function() {
@@ -50,20 +52,49 @@ function updateAbsoluteCCPS() {
 };
 
 let unlockedBuildings = [];
-function updateOwnedBuildings() {
+function updateOwnedBuildings(addOne) {
     if (mechs[0] > 0) {
         if (unlockedBuildings.includes('mechs') == false) {
             unlockedBuildings.push('mechs');
+            const img = document.createElement('img')
+            if (THEME == 'McCuen') {
+                img.src = 'Themes/McCuen/1st_Building.png'
+            } else {
+                img.src = 'Themes/Garfield/1st_Building.png'
+            }
+            img.id = 'FirstBuildingIcon'
+            img.style.height = '250px'
+            document.getElementById('first_building').appendChild((img))
         };
     };
     if (teams[0] > 0) {
         if (unlockedBuildings.includes('teams') == false) {
             unlockedBuildings.push('teams');
+            const img = document.createElement('img')
+            if (THEME == 'McCuen') {
+                img.src = 'Themes/McCuen/2nd_Building.png'
+            } else {
+                img.src = 'Themes/Garfield/2nd_Building.png'
+            }
+            img.id = 'SecondBuildingIcon'
+            img.style.height = '250px'
+            img.style.top = '1500px'
+            document.getElementById('second_building').appendChild((img))
         };
     };
     if (cats[0] > 0) {
         if (unlockedBuildings.includes('cats') == false) {
             unlockedBuildings.push('cats');
+            const img = document.createElement('img')
+            if (THEME == 'McCuen') {
+                img.src = 'Themes/McCuen/3rd_Building.png'
+            } else {
+                img.src = 'Themes/Garfield/3rd_Building.png'
+            }
+            img.id = 'ThirdBuildingIcon'
+            img.style.height = '250px'
+            img.style.top = '1750px'
+            document.getElementById('Third_building').appendChild((img))
         };
     };
 };
@@ -240,7 +271,7 @@ function buyTeams() {
         previousCuenCoins = CUENCOINS;
         CUENCOINS = (previousCuenCoins - teams[1]);
         cuenCoins.innerHTML = CUENCOINS;
-
+        updateOwnedBuildings()
         teams[0] = teams[0] + 1;
         RefreshInterval()
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]} ` + absoluteCCPS.toFixed(1);
@@ -282,7 +313,7 @@ function buyCats() {
         previousCuenCoins = CUENCOINS;
         CUENCOINS = (previousCuenCoins - cats[1]);
         cuenCoins.innerHTML = CUENCOINS;
-
+        updateOwnedBuildings()
         cats[0] = cats[0] + 1;
         RefreshInterval()
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1);
@@ -320,10 +351,12 @@ function buyCats() {
 
 function buyMech() {
     if (CUENCOINS >= mechs[1]) {
+        document.getElementById
         previousCuenCoins = Number(`${CUENCOINS}`);
         CUENCOINS = (previousCuenCoins - mechs[1]);
         cuenCoins.innerHTML = CUENCOINS;
         mechs[0] = mechs[0] + 1;
+        updateOwnedBuildings()
         RefreshInterval()
         document.getElementById("CCPS").innerHTML = `${usedTheme[0][0]}: ` + absoluteCCPS.toFixed(1); 
         mechs[1] = Math.trunc(((1.3**mechs[0]) * 10));
