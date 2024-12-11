@@ -805,7 +805,7 @@ document.getElementById('McCuenTheme').addEventListener('click', function() {
             element.style.backgroundColor = '#ff5050';
         })
         
-    var tempClassVar = document.querySelectorAll(`themetext`)
+    var tempClassVar = document.querySelectorAll(`.THEMETEXT`)
     tempClassVar.forEach(element => {
         if (element.textContent == 'GPS') {
             element.textContent = 'CCPS'
@@ -821,9 +821,9 @@ document.getElementById('McCuenTheme').addEventListener('click', function() {
             element.textContent = 'Mechanical Keyboards'
         } else if (element.textContent == 'lasagnas') {
             element.textContent = 'Mechs'
-        } else if (element.textContent == 'Fingers') {
+        } else if (element.textContent == 'Odies') {
             element.textContent = 'Microsoft Teams'
-        } else if (element.textContent == 'fingers') {
+        } else if (element.textContent == 'odies') {
             element.textContent = 'Teams'
         } else if (element.textContent == 'Pizzas from Vito') {
             element.textContent = 'Cats'
@@ -863,7 +863,7 @@ document.getElementById('GarfieldTheme').addEventListener('click', function() {
         })
 
     // this part changes all the actual text of the theme
-    var tempClassVar = document.querySelectorAll(`themetext`)
+    var tempClassVar = document.querySelectorAll(`.THEMETEXT`)
     tempClassVar.forEach(element => {
         if (element.textContent == 'CCPS') {
             element.textContent = 'GPS'
@@ -880,9 +880,9 @@ document.getElementById('GarfieldTheme').addEventListener('click', function() {
         } else if (element.textContent == 'Mechs') {
             element.textContent = 'lasagnas'
         } else if (element.textContent == 'Microsoft Teams') {
-            element.textContent = 'Fingers'
+            element.textContent = 'Odies'
         } else if (element.textContent == 'Teams') {
-            element.textContent = 'fingers'
+            element.textContent = 'odies'
         } else if (element.textContent == 'Cats') {
             element.textContent = 'Pizzas from Vito'
         } else if (element.textContent == 'cats') {
