@@ -294,4 +294,14 @@ function endGame(result, message = '') {
   messageElement.textContent = message || `You ${result === 'win' ? 'Won!' : 'Lost!'}`;
   gameContainer.style.display = 'none'; // Hide game container
   document.getElementById('menu').style.display = 'block'; // Show menu
+  if(result==='win')
+    setTimeout(() => {
+      window.location.href = 'win.html';
+  }, 20);
+  // Redirect to main.html if the player loses
+  if (result === 'lose') {
+    setTimeout(() => {
+      window.location.href = '../main.html';
+    }, 2000); // Delay for 2 seconds before redirecting
+  }
 }
