@@ -175,6 +175,13 @@ function click() {
     CUENCOINS = (previousCuenCoins + clickAmount[0]);
     cuenCoins.innerHTML = CUENCOINS;
     document.getElementById("title").innerHTML = (CUENCOINS + ` ${usedTheme[0][0]}`);
+    if (THEME == 'McCuen') {
+        document.getElementById('clickSoundEffect').currentTime = 1.7;
+    } else {
+        document.getElementById('clickSoundEffect').currentTime = 0.2;
+    }
+    
+    document.getElementById('clickSoundEffect').play()
 };
 function save() {
     localStorage['CUENCOINS'] = String(CUENCOINS);
@@ -778,6 +785,7 @@ document.getElementById('McCuenTheme').addEventListener('click', function() {
     document.body.background = 'Themes/McCuen/Background.png'
     document.getElementById('goldenDuck').src = "Themes/McCuen/GoldenThing.png"
     document.getElementById('McCuenFace').src = "Themes/McCuen/TheClicked.gif"
+    document.getElementById('clickSoundEffect').src = "Themes/McCuen/clickSoundEffect.mp4"
     for (x=0; x<4; x++) {
         var tempClassVar = document.querySelectorAll(`${(['h1', 'h2', 'h3', '.building'])[x]}`)
         tempClassVar.forEach(element => {
@@ -834,6 +842,7 @@ document.getElementById('GarfieldTheme').addEventListener('click', function() {
     document.body.background = 'Themes/Garfield/Background.png'
     document.getElementById('goldenDuck').src = "Themes/Garfield/GoldenThing.png"
     document.getElementById('McCuenFace').src = "Themes/Garfield/TheClicked.png"
+    document.getElementById('clickSoundEffect').src = "Themes/Garfield/clickSoundEffect.mp3"
     for (x=0; x<4; x++) {
         var tempClassVar = document.querySelectorAll(`${(['h1', 'h2', 'h3', '.building'])[x]}`)
         tempClassVar.forEach(element => {
