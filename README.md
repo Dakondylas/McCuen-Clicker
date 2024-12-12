@@ -53,6 +53,9 @@ Run the index.html inside /McCumen Draught and Drive
 2. **Extract it**
 3. **Run Main.html**
 
+SKIP ALL FOR CURRENT ITEMS
+![image](https://github.com/user-attachments/assets/27eec615-6e5d-439c-b951-0d2577379f49)
+
 
 
 
