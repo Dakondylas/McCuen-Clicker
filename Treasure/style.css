@@ -1,0 +1,104 @@
+/* Apply Pirate Theme Background with Burlywood */
+body {
+    font-family: 'Rock Salt', cursive; /* Pirate font */
+    background-color: burlywood; /* Burlywood background color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #fff; /* White text color for contrast */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Subtle text shadow for better visibility */
+  }
+  
+  /* Game container style */
+  .game-container {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background to pop out text */
+    border-radius: 15px;
+    border: 3px solid #ffcc00; /* Golden border like treasure */
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7); /* Shadow for depth */
+  }
+  
+  h1 {
+    color: #ffcc00; /* Golden text for the title */
+    font-size: 36px;
+  }
+  
+  p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .grid-container {
+    width: 100%;
+    height: 400px;
+    overflow: auto;
+    margin-top: 20px;
+    background-image: url('palm_tree.png'); /* Set your palm tree image */
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 150px; /* Adjust size of the palm tree image */
+  }
+  
+  /* Grid Styles */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(60, 20px);
+    grid-template-rows: repeat(50, 20px);
+    gap: 5px;
+    margin-top: 20px;
+    justify-items: center;
+  }
+  
+  .grid div {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .grid div:hover {
+    background-color: #ff6347; /* Lighter red on hover */
+  }
+  
+  /* Button Style */
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #ff8000; /* Lighter gold on hover */
+  }
+  
+  /* Scrollbar styling */
+  .grid-container::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .grid-container::-webkit-scrollbar-thumb {
+    background-color: #ffcc00;
+    border-radius: 10px;
+  }
+  
+  .grid-container::-webkit-scrollbar-track {
+    background-color: #333;
+  }
+  

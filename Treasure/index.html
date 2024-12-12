@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Treasure Finder Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet"> <!-- Pirate font -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>HA! Pain and Suffering</h1>
+    <p>Arrr! Find the treasure buried on the island!</p>
+    <div class="grid-container">
+      <div class="grid" id="gameGrid"></div>
+    </div>
+    <button id="restartButton">Return to Game</button>
+    <button id="playAudioButton">Start the Adventure Music</button> <!-- New button to start audio -->
+  </div>
+
+  <!-- Audio element -->
+  <audio id="audioPlayer" loop>
+    <source src="The_Backyardigans_-_Treasure_ft_Jamia_Simone_Nash_Thomas_Sharkey_Corwin_C_Tuggles_Sean_Curley_[_YTBMP3.org_].mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="script.js"></script>
+  <script>
+    // Play audio when the button is clicked
+    document.getElementById('playAudioButton').addEventListener('click', () => {
+      const audio = document.getElementById('audioPlayer');
+      audio.play().catch(error => {
+        console.error('Audio playback failed:', error);
+      });
+    });
+  </script>
+
+</body>
+</html>
