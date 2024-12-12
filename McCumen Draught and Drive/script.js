@@ -289,3 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 });
+setTimeout(() => {
+      window.location.href = '../main.html';
+    }, 4000);
