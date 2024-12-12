@@ -2,6 +2,7 @@
 
 ![image](https://github.com/user-attachments/assets/b498de0d-3e7e-4ff7-9fb7-b05a2a5bf7d5)
 
+#Try all the minigames!
 
 **CuenClicker** is an engaging and addictive web-based clicker game that challenges players to accumulate CuenCoins by clicking, upgrading, and tackling thrilling boss battles. Dive into themed adventures with **McCuen** and **Garfield**, each offering unique visuals and gameplay experiences.
 
@@ -34,6 +35,7 @@ Drink and drive as Mr.McCumen.
    - **Mechanical Keyboards:** +0.1 CCPS
    - **Microsoft Teams:** +1 CCPS
    - **Cats:** +10 CCPS
+   - Go through all the minigames!
 
 ![image](https://github.com/user-attachments/assets/42ea182f-667b-4038-8e12-702b0c1a1f69)
 
