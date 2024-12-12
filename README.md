@@ -21,6 +21,11 @@
 - **Interactive UI:** Enjoy smooth animations, responsive design, and interactive elements that enhance your gaming experience.
 - **Vibrant Animations:** Clickable images shake and rotate upon interaction, adding a dynamic feel to the game.
 
+## BONUS:
+McCumen Draught and drive. 
+Drink and drive as Mr.McCumen. 
+Run the index.html inside /McCumen Draught and Drive
+
 ## 📜 How to Play
 
 1. **Start Clicking:** Click on the main character to earn CuenCoins (CuenCoins are your in-game currency).
@@ -48,12 +53,19 @@
 2. **Extract it**
 3. **Run Main.html**
 
+
+
+
+
 ## 🎨 Screenshots
 
 ![image](https://github.com/user-attachments/assets/422c9c57-df90-44c8-9e96-6db12b7a488a)
 
 
 ![image](https://github.com/user-attachments/assets/a88340f9-0e93-4ff7-a130-8dbe83df5c70)
+
+![image](https://github.com/user-attachments/assets/0b30dd17-8e8b-41c4-8d68-ceca69cc7899)
+
 
 ## 🛠️ Technologies Used
 
